@@ -29,12 +29,13 @@ const Carousel = (props: Props) => {
 					modifier: 1,
 					slideShadows: true,
 				}}
+				loop
 				pagination={true}
 				modules={[EffectCoverflow]}
 				className="mySwiper">
 				{props.data.map((item) => (
 					<SwiperSlide key={item.id}>
-						<div className="mx-1 h-full w-full border-2 border-dark bg-white">
+						<div className="mx-1 h-full w-full bg-white">
 							<div className="relative aspect-[2/3] w-full">
 								<Image
 									src={item.assets[0].url}

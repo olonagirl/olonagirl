@@ -4,7 +4,7 @@ import { FacebookLogo, InstagramLogo } from "@phosphor-icons/react"
 const Footer = () => {
 	return (
 		<footer className="flex w-full flex-col items-center bg-gradient-to-br from-main via-accent to-sky-500 px-5 pb-6 pt-20 lg:px-20">
-			<p className="font-vanity text-8xl uppercase text-light lg:text-[200px]">
+			<p className="font-vanity text-7xl uppercase text-light lg:text-[200px]">
 				Olonagirl
 			</p>
 			<div className="my-7 flex items-center justify-center gap-4 text-xl text-light lg:text-3xl">

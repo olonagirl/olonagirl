@@ -1,20 +1,35 @@
 .container {
 	width: 100%;
+	overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 .swiper {
 	width: 100%;
-	min-height: 1000px;
+	min-height: 500px;
+	padding: 50px 0;
+	overflow-x: hidden;
 }
 
 .swiper-slide {
 	background-position: center;
 	background-size: cover;
-	width: 450px;
-	height: 600px;
+	width: 250px;
+	height: 333.33px;
 }
 
 .swiper-slide img {
 	display: block;
 	width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+	.swiper {
+		min-height: 900px;
+	}
+
+	.swiper-slide {
+		width: 450px;
+		height: 600px;
+	}
 }
