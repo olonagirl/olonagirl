@@ -2,11 +2,9 @@ import React from "react"
 
 import { ProductCard } from "../_components"
 import { commerce } from "../_lib/commerce"
-import { usePageTitle } from "../_hooks"
 
 const Products = async () => {
 	const collection = await commerce.products.list()
-	usePageTitle("Products")
 
 	if (!collection) return null
 
