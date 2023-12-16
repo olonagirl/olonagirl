@@ -1,3 +1,4 @@
+import { Raleway } from "next/font/google"
 import type { Metadata } from "next"
 
 import { Footer, Navbar } from "./_components"
@@ -8,6 +9,12 @@ export const metadata: Metadata = {
 	description: "",
 }
 
+const font = Raleway({
+	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+	style: ["italic", "normal"],
+	subsets: ["latin"],
+})
+
 export default function RootLayout({
 	children,
 }: {
@@ -15,7 +22,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body>
+			<body className={font.className}>
 				<Navbar />
 				<main className="w-full">{children}</main>
 				<Footer />
