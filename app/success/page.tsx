@@ -2,19 +2,10 @@
 import Confetti from "react-confetti"
 import React from "react"
 
-import { useWindowSize } from "../_hooks"
-
 const Success = () => {
-	const { height, width } = useWindowSize()
-
 	return (
 		<main className="h-[100dvh] w-full">
-			<Confetti
-				height={height}
-				numberOfPieces={1000}
-				recycle={false}
-				width={width}
-			/>
+			<Confetti height={1000} numberOfPieces={1500} recycle={false} width={1000} />
 		</main>
 	)
 }
