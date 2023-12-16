@@ -13,6 +13,7 @@ const useWindowSize = () => {
 	})
 
 	const handleWindowResize = () => {
+		if (!window || typeof window === undefined) return
 		setWindowSize({
 			height: window.innerHeight,
 			width: window.innerWidth,
