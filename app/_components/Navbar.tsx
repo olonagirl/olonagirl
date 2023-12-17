@@ -1,10 +1,8 @@
 "use client"
-import { ShoppingCartSimple } from "@phosphor-icons/react"
+import { Bag, User } from "@phosphor-icons/react"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-
-import { store } from "../_store"
 
 const NavLinks = [
 	{ label: "home", href: "/" },
@@ -13,26 +11,26 @@ const NavLinks = [
 ]
 
 const Navbar = () => {
-	const { isAuthenticated, totalItems } = store()
 	const [scrolled, setScrolled] = useState(false)
 	const [isOpen, setIsOpen] = useState(false)
 	const pathname = usePathname()
 
+	const handleScroll = () => setScrolled(window.scrollY > 700)
+
 	useEffect(() => {
-		const handleScroll = () => setScrolled(window.scrollY > 700)
 		window.addEventListener("scroll", handleScroll)
 		return () => window.removeEventListener("scroll", handleScroll)
 	}, [])
 
 	return (
 		<nav
-			className={`left-0 top-0 !z-[5] flex w-full items-center justify-between border-b-2 bg-white px-5 py-6 transition-all duration-300 lg:px-20 ${
+			className={`left-0 top-0 !z-[5] flex w-screen items-center justify-between bg-transparent bg-white px-5 py-4 lg:px-40 ${
 				scrolled ? "fixed" : "static"
 			}`}>
 			<div className="flex items-center gap-4">
 				<Link
 					href="/"
-					className="font-vanity text-2xl font-extrabold text-main lg:text-4xl">
+					className="font-vanity text-xl font-extrabold text-main lg:text-3xl">
 					OlonaGirl
 				</Link>
 			</div>
@@ -41,6 +39,7 @@ const Navbar = () => {
 					<Link
 						key={index}
 						href={href}
+						prefetch
 						className={`link text-xs font-semibold capitalize lg:text-sm ${
 							pathname === href ? "text-main" : "text-dark"
 						}`}>
@@ -48,33 +47,14 @@ const Navbar = () => {
 					</Link>
 				))}
 			</div>
-			{isAuthenticated ? (
-				<div className="flex items-center gap-5">
-					<button
-						onClick={() => setIsOpen(!isOpen)}
-						className="relative grid h-7 w-7 place-items-center rounded-full lg:h-10 lg:w-10">
-						<span className="absolute -top-1 right-0 text-xs lg:top-0">
-							{totalItems}
-						</span>
-						<ShoppingCartSimple className="text-base text-main lg:text-xl" />
-					</button>
-					<button className="h-7 w-7 rounded-full border lg:h-10 lg:w-10"></button>
-				</div>
-			) : (
-				<div className="flex items-center gap-5">
-					<Link
-						href="/signup"
-						className="rounded-full bg-main px-3 py-2 text-xs text-white lg:text-sm">
-						Create Account
-					</Link>
-					<button className="relative grid h-7 w-7 place-items-center rounded-full lg:h-10 lg:w-10">
-						<span className="absolute -top-1 right-0 text-xs text-main lg:top-0">
-							{totalItems}
-						</span>
-						<ShoppingCartSimple className="text-base text-main lg:text-xl" />
-					</button>
-				</div>
-			)}
+			<div className="flex items-center gap-2 lg:gap-4">
+				<button onClick={() => console.log(!isOpen)}>
+					<User className="text-base lg:text-2xl" />
+				</button>
+				<button onClick={() => setIsOpen(!isOpen)}>
+					<Bag className="text-base lg:text-2xl" />
+				</button>
+			</div>
 		</nav>
 	)
 }

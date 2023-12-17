@@ -9,9 +9,11 @@ const Products = async () => {
 	if (!collection) return null
 
 	return (
-		<main className="w-full px-5 py-20 lg:px-20">
-			<p></p>
-			<section className="grid w-full grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-5">
+		<main className="flex w-full flex-col items-center px-5 py-10 lg:px-40">
+			<p className="mb-10 w-full border-b border-dark text-center font-vanity text-4xl text-main lg:w-2/3 lg:text-7xl">
+				Shop
+			</p>
+			<section className="grid w-full grid-cols-2 gap-2 lg:grid-cols-5">
 				{collection.data.map((product) => (
 					<ProductCard key={product.id} {...product} />
 				))}

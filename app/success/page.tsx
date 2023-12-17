@@ -1,11 +1,8 @@
-"use client"
-import Confetti from "react-confetti"
 import React from "react"
 
 const Success = () => {
 	return (
-		<main className="h-[100dvh] w-full">
-			<Confetti height={1000} numberOfPieces={1500} recycle={false} width={1000} />
+		<main className="w-full py-10 px-5 lg:px-40">
 		</main>
 	)
 }

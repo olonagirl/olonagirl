@@ -11,6 +11,10 @@ const config: Config = {
 			vanity: ["Vanity"],
 		},
 		extend: {
+			backgroundImage: {
+				"fixed-1": "url('/images/fixed-1.jpg')",
+				"fixed-2": "url('/images/fixed-2.jpg')",
+			},
 			colors: {
 				main: "#A72B83",
 				accent: "#C360A3",
