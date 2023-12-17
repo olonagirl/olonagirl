@@ -23,7 +23,7 @@ const Signin = () => {
 	})
 
 	return (
-		<div className="flex h-[100dvh] w-full flex-col items-center gap-4 lg:flex-row lg:items-start">
+		<div className="flex w-full flex-col items-center gap-4 py-40 lg:flex-row lg:items-start">
 			<section className="h-full w-full lg:w-2/3"></section>
 			<section className="grid h-full w-full place-items-center px-5 lg:w-1/3 lg:px-14">
 				<div className="w-full">
@@ -33,7 +33,7 @@ const Signin = () => {
 							id="email"
 							onChange={handleChange}
 							label="Email"
-							error={String(errors.email)}
+							error={errors.email}
 							placeholder="Email"
 						/>
 						<Input
@@ -41,14 +41,14 @@ const Signin = () => {
 							id="password"
 							onChange={handleChange}
 							label="Password"
-							error={String(errors.password)}
+							error={errors.password}
 							placeholder="Password"
 						/>
-						<Button type="submit">Sign in</Button>
+						<Button type="submit">Signin</Button>
 					</form>
 					<p className="mt-10 flex items-center">
-						Don&apos;t have an account?{" "}
-						<Link href="/signup" className="link text-main">
+						Don&apos;t have an account?
+						<Link href="/signup" prefetch className="link ml-1 text-main">
 							Sign up
 						</Link>
 					</p>

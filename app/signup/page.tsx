@@ -19,9 +19,9 @@ const Signup = () => {
 	})
 
 	return (
-		<div className="flex h-[100dvh] w-full items-center gap-4 lg:items-start">
+		<div className="flex w-full items-center gap-4 py-40 lg:items-start">
 			<section className="w-full lg:w-2/3"></section>
-			<section className="grid w-full place-items-center lg:w-1/3">
+			<section className="grid w-full place-items-center px-5 lg:w-1/3 lg:px-10">
 				<div className="w-full">
 					<form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
 						<Input
@@ -29,7 +29,7 @@ const Signup = () => {
 							id="firstname"
 							onChange={handleChange}
 							label="First Name"
-							error={String(errors.firstname)}
+							error={errors.firstname}
 							placeholder="Password"
 						/>
 						<Input
@@ -37,7 +37,7 @@ const Signup = () => {
 							id="lastname"
 							onChange={handleChange}
 							label="Last Name"
-							error={String(errors.lastname)}
+							error={errors.lastname}
 							placeholder="Password"
 						/>
 						<Input
@@ -45,7 +45,7 @@ const Signup = () => {
 							id="email"
 							onChange={handleChange}
 							label="Email"
-							error={String(errors.email)}
+							error={errors.email}
 							placeholder="Email"
 						/>
 						<Input
@@ -53,14 +53,14 @@ const Signup = () => {
 							id="phone"
 							onChange={handleChange}
 							label="Email"
-							error={String(errors.phone)}
+							error={errors.phone}
 							placeholder="Phone"
 						/>
-						<Button type="submit">Sign in</Button>
+						<Button type="submit">Sign Up</Button>
 					</form>
 					<p className="mt-10 flex items-center">
-						Have an account already?{" "}
-						<Link href="/signup" className="link text-main">
+						Have an account already?
+						<Link href="/signin" prefetch className="link ml-1 text-main">
 							Sign in
 						</Link>
 					</p>

@@ -3,7 +3,7 @@ import { FacebookLogo, InstagramLogo } from "@phosphor-icons/react"
 
 const Footer = () => {
 	return (
-		<footer className="flex w-full flex-col items-center bg-gradient-to-br from-main via-accent to-sky-500 px-5 pb-6 pt-20 lg:px-20">
+		<footer className="flex w-full flex-col items-center bg-gradient-to-br from-main via-accent to-sky-500 px-5 pb-6 pt-20 lg:px-40">
 			<p className="font-vanity text-7xl uppercase text-light lg:text-[200px]">
 				Olonagirl
 			</p>
@@ -22,7 +22,7 @@ const Footer = () => {
 				</a>
 			</div>
 			<div className="flex w-full items-center justify-center border-t py-4">
-				<p className="text-xs font-semibold uppercase text-light">
+				<p className="text-center text-[10px] font-semibold uppercase text-light lg:text-xs">
 					&copy; {new Date().getFullYear()} Olonagirl &bull; All rights reseerved
 					&bull; Powered by Chec-Commerce.
 				</p>

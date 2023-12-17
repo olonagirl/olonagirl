@@ -1,4 +1,4 @@
-import { Raleway } from "next/font/google"
+import { Space_Grotesk } from "next/font/google"
 import type { Metadata } from "next"
 
 import { Footer, Navbar } from "./_components"
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 	description: "",
 }
 
-const font = Raleway({
-	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-	style: ["italic", "normal"],
+const font = Space_Grotesk({
+	weight: ["300", "400", "500", "600", "700"],
+	style: ["normal"],
 	subsets: ["latin"],
 })
 

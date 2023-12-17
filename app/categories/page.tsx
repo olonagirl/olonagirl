@@ -9,7 +9,7 @@ const Categories = async () => {
 	return (
 		<main className="">
 			<p></p>
-			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-20">
+			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-40">
 				{categories.data.map((category) => (
 					<CategoryCard key={category.id} {...category} />
 				))}
