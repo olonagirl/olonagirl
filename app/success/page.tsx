@@ -1,11 +1,8 @@
 import React from "react"
 
-import { ConfettiContainer } from "../_components"
-
 const Success = () => {
 	return (
-		<main className="h-[100dvh] w-full">
-			<ConfettiContainer />
+		<main className="w-full py-10 px-5 lg:px-40">
 		</main>
 	)
 }

@@ -15,7 +15,7 @@ const Input = (props: InputProps) => {
 					</label>
 				)}
 				<textarea
-					className="min-h-[150px] w-full resize-none rounded border-2 border-gray-500 px-1 text-sm transition-all duration-300 focus:border-accent"
+					className="min-h-[150px] w-full resize-none border-2 border-gray-500 px-1 text-sm transition-all duration-300 focus:border-accent"
 					{...props}></textarea>
 				{props.error && <p className="text-xs text-red-600">{props.error}</p>}
 			</div>
@@ -34,7 +34,7 @@ const Input = (props: InputProps) => {
 					</label>
 				)}
 				<select
-					className="flex h-[40px] w-full cursor-pointer items-center gap-2 rounded border-2 border-gray-500 px-1 py-1 text-sm capitalize transition-all duration-300 focus-within:border-accent"
+					className="flex h-[40px] w-full cursor-pointer items-center gap-2 border-2 border-gray-500 px-1 py-1 text-sm capitalize transition-all duration-300 focus-within:border-accent"
 					{...props}>
 					{props.children}
 				</select>
@@ -52,7 +52,7 @@ const Input = (props: InputProps) => {
 						className="peer sr-only rounded accent-accent"
 						{...props}
 					/>
-					<div className="shadow-protrusion-xs relative h-4 w-4 cursor-pointer rounded border-2 border-accent transition-opacity after:absolute after:left-1/2 after:top-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-sm after:bg-accent after:opacity-0 peer-checked:after:opacity-100 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2" />
+					<div className="relative h-4 w-4 cursor-pointer rounded border-2 border-accent transition-opacity after:absolute after:left-1/2 after:top-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-sm after:bg-accent after:opacity-0 peer-checked:after:opacity-100 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2" />
 					<span className="w-fit break-words">{props.label}</span>
 				</label>
 				{props.error && <p className="text-xs text-red-600">{props.error}</p>}
@@ -67,7 +67,7 @@ const Input = (props: InputProps) => {
 					{props.label}
 				</label>
 			)}
-			<div className="flex w-full items-center gap-2 rounded border-2 border-gray-500 px-1 text-sm transition-all duration-300 focus-within:border-accent">
+			<div className="flex w-full items-center gap-2 border-2 border-gray-500 px-1 text-sm transition-all duration-300 focus-within:border-accent">
 				{props.icon && <span>{props.icon}</span>}
 				<input
 					type={revealed ? "text" : props.typed}

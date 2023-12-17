@@ -19,7 +19,7 @@ const Signup = () => {
 	})
 
 	return (
-		<div className="flex w-full items-center gap-4 py-40 lg:items-start">
+		<div className="flex w-full items-center gap-4 py-10 lg:items-start">
 			<section className="w-full lg:w-2/3"></section>
 			<section className="grid w-full place-items-center px-5 lg:w-1/3 lg:px-10">
 				<div className="w-full">

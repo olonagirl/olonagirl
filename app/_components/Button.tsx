@@ -7,7 +7,7 @@ const Button = (props: ButtonProps) => {
 	if (props.as === "link") {
 		return (
 			<Link
-				className={`flex h-[40px] items-center justify-center gap-1 rounded bg-accent text-sm text-light ${
+				className={`flex h-[40px] items-center justify-center gap-1 bg-accent text-sm text-light ${
 					props.width ? props.width : "w-full"
 				}`}
 				{...props}>
@@ -18,7 +18,7 @@ const Button = (props: ButtonProps) => {
 
 	return (
 		<button
-			className={`flex h-[40px] items-center justify-center gap-1 rounded bg-accent text-sm text-light ${
+			className={`flex h-[40px] items-center justify-center gap-1 bg-accent text-sm text-light ${
 				props.width ? props.width : "w-full"
 			}`}
 			{...props}>

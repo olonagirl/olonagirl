@@ -23,7 +23,7 @@ const Signin = () => {
 	})
 
 	return (
-		<div className="flex w-full flex-col items-center gap-4 py-40 lg:flex-row lg:items-start">
+		<div className="flex w-full flex-col items-center gap-4 py-10 lg:flex-row lg:items-start">
 			<section className="h-full w-full lg:w-2/3"></section>
 			<section className="grid h-full w-full place-items-center px-5 lg:w-1/3 lg:px-14">
 				<div className="w-full">
