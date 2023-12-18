@@ -6,10 +6,15 @@ import { FooterData } from "../_assets/footer-data"
 
 const Footer = () => {
 	return (
-		<footer className="flex w-full flex-col items-center bg-dark px-5 py-10 text-light lg:px-40 lg:py-20">
+		<footer className="flex w-full flex-col items-center bg-dark px-5 py-10 text-light lg:px-20 lg:py-20">
 			<div className="flex w-full flex-wrap items-start justify-between gap-10 py-10">
 				<div className="flex min-w-[300px] flex-col items-center">
-					<p className="font-vanity text-3xl uppercase lg:text-6xl">Olonagirl</p>
+					<Link
+						href="/"
+						prefetch
+						className="font-vanity text-4xl uppercase lg:text-6xl">
+						Olonagirl
+					</Link>
 					<div className="mt-7 flex items-center justify-center gap-4 text-xl lg:text-2xl">
 						<a
 							href="https://facebook.com/"
@@ -32,9 +37,9 @@ const Footer = () => {
 							<div className="flex flex-col gap-2">
 								{item.links.map((link, idx) => (
 									<Link
-										href={`/`}
+										href={link.href}
 										key={idx}
-										className="text-xs text-gray-400 lg:text-sm">
+										className="text-xs text-gray-300 transition-colors duration-300 hover:text-gray-400 lg:text-sm">
 										{link.label}
 									</Link>
 								))}
@@ -43,7 +48,7 @@ const Footer = () => {
 					))}
 				</div>
 			</div>
-			<div className="flex w-full items-center justify-center border-t py-4">
+			<div className="flex w-full items-center justify-center border-t py-4 text-gray-300">
 				<p className="text-center text-[10px] font-semibold uppercase lg:text-xs">
 					&copy; {new Date().getFullYear()} Olonagirl &bull; All rights reseerved
 					&bull; Powered by Chec-Commerce.

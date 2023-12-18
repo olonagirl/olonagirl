@@ -1,5 +1,18 @@
 import React, { ComponentProps } from "react"
+import { StaticImageData } from "next/image"
 import { LinkProps } from "next/link"
+
+export interface TestimonialProps {
+	id: string
+	name: string
+	image: StaticImageData | string
+	comment: string
+	rating: number
+}
+
+export interface CountryProps {
+	[name: string]: string
+}
 
 export type InputProps =
 	| (Omit<ComponentProps<"input">, "type"> & {
@@ -33,10 +46,14 @@ export type ButtonProps =
 			as?: "button"
 			/** Tailwind width e.g., w-5, w-[200px] */
 			width?: string
+			/** Tailwind color e.g., bg-red-500, bg-black, bg-white/[0.5] */
+			background?: string
 	  })
 	| (LinkProps & {
 			as: "link"
 			/** Tailwind width e.g., w-5, w-[200px] */
 			width?: string
+			/** Tailwind color e.g., bg-red-500, bg-black, bg-white/[0.5] */
+			background?: string
 			children?: React.ReactNode
 	  })

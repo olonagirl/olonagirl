@@ -6,11 +6,11 @@ import Link from "next/link"
 const ProductCard = (props: Product) => {
 	return (
 		<Link href={`/products/${props.id}`} prefetch className="w-full">
-			<div className="group relative aspect-[2/3] w-full overflow-hidden">
+			<div className="group relative aspect-square w-full overflow-hidden">
 				<Image
 					src={props.assets[0].url}
 					alt={props.assets[0].filename}
-					className="object-cover transition-all duration-300 group-hover:scale-105"
+					className="object-cover transition-all duration-300 group-hover:scale-[1.02]"
 					fill
 					sizes="(max-width: 1024px) 100%,"
 					priority

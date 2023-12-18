@@ -19,7 +19,7 @@ const Category = async ({ params: { id } }: Props) => {
 
 	return (
 		<>
-			<section className="flex w-full flex-col items-start gap-4 px-5 py-10 lg:flex-row lg:px-40">
+			<section className="flex w-full flex-col items-start gap-4 px-5 py-10 lg:flex-row lg:px-20">
 				<div className="relative aspect-[3/2] w-full lg:w-1/4">
 					<Image
 						src=""
@@ -36,7 +36,7 @@ const Category = async ({ params: { id } }: Props) => {
 					</p>
 				</div>
 			</section>
-			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-40">
+			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-20">
 				{products.data.map((product) => (
 					<ProductCard key={product.id} {...product} />
 				))}

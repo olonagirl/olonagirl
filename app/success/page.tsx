@@ -1,10 +1,7 @@
 import React from "react"
 
 const Success = () => {
-	return (
-		<main className="w-full py-10 px-5 lg:px-40">
-		</main>
-	)
+	return <main className="w-full px-5 py-10 lg:px-20"></main>
 }
 
 export default Success
