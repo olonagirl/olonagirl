@@ -15,7 +15,7 @@ const Input = (props: InputProps) => {
 					</label>
 				)}
 				<textarea
-					className="min-h-[150px] w-full resize-none border-2 border-gray-500 px-1 text-sm transition-all duration-300 focus:border-accent"
+					className="min-h-[150px] w-full resize-none border-2 border-gray-500 bg-transparent px-1 text-sm transition-all duration-300 focus:border-accent"
 					{...props}></textarea>
 				{props.error && <p className="text-xs text-red-600">{props.error}</p>}
 			</div>

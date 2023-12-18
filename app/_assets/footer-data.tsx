@@ -2,9 +2,10 @@ export const FooterData = [
 	{
 		header: "Services",
 		links: [
-			{ label: "Shipping", href: "/shipping" },
-			{ label: "Returns & Exchange", href: "/returns" },
-			{ label: "Payments", href: "/payment" },
+			{ label: "Order Processing", href: "/customer-service" },
+			{ label: "Shipping", href: "/customer-service" },
+			{ label: "Returns & Exchange", href: "/customer-service" },
+			{ label: "Payments", href: "/customer-service" },
 		],
 	},
 	{
@@ -12,7 +13,7 @@ export const FooterData = [
 		links: [
 			{ label: "Contact", href: "/contact" },
 			{ label: "Terms & Conditions", href: "/terms" },
-			{ label: "Provacy Policy", href: "/privacy" },
+			{ label: "Privacy Policy", href: "/privacy-policy" },
 		],
 	},
 ]
