@@ -1,5 +1,3 @@
-import React from "react"
-
 import { commerce } from "@/app/_lib/commerce"
 
 const User = async () => {
