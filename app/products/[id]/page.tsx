@@ -34,7 +34,7 @@ const Product = ({ params: { id } }: Props) => {
 				<div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
 					<div className="flex w-full flex-col">
 						{product.assets.map((asset) => (
-							<div key={asset.id} className="relative aspect-square w-full">
+							<div key={asset.id} className="relative aspect-[2/3] w-full">
 								<Image
 									src={asset.url}
 									alt={asset.filename}

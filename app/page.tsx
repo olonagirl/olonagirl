@@ -28,7 +28,7 @@ const Home = async () => {
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="mb-5 text-2xl lg:text-4xl">New Arrivals</p>
-				<div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-3">
+				<div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
 					{collection.data
 						.sort((a, b) => b.created - a.created)
 						.map((product) => <ProductCard key={product.id} {...product} />)

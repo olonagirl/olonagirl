@@ -6,7 +6,7 @@ import Link from "next/link"
 const ProductCard = (props: Product) => {
 	return (
 		<Link href={`/products/${props.id}`} prefetch className="w-full">
-			<div className="group relative aspect-square w-full overflow-hidden">
+			<div className="group relative aspect-[2/3] w-full overflow-hidden">
 				<Image
 					src={props.assets[0].url}
 					alt={props.assets[0].filename}
