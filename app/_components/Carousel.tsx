@@ -26,7 +26,7 @@ const Carousel = (props: Props) => {
 				<div
 					key={item.id}
 					className={`relative h-full w-full transform transition-all duration-500 ease-in-out ${
-						index === current ? "block" : "hidden"
+						index === current ? "block scale-[1.08] opacity-100" : "hidden opacity-0"
 					}`}>
 					<Image
 						src={item.image}

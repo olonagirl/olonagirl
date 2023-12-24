@@ -10,7 +10,7 @@ const ProductCard = (props: Product) => {
 				<Image
 					src={props.assets[0].url}
 					alt={props.assets[0].filename}
-					className="object-cover transition-all duration-300 group-hover:scale-[1.02]"
+					className="object-cover transition-all duration-300 hover:scale-105"
 					fill
 					sizes="(max-width: 1024px) 100%,"
 					priority
@@ -18,8 +18,8 @@ const ProductCard = (props: Product) => {
 			</div>
 			<div className="w-full py-2">
 				<div className="flex w-full items-center justify-between">
-					<p className="text-xs font-light lg:text-sm">{props.name}</p>
-					<p className="text-xs font-light lg:text-sm">
+					<p className="text-xs font-light capitalize lg:text-sm">{props.name}</p>
+					<p className="text-xs font-medium lg:text-sm">
 						{props.price.formatted_with_symbol}
 					</p>
 				</div>
