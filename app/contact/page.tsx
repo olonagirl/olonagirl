@@ -16,19 +16,19 @@ const Contact = () => {
 				</p>
 				<div className="flex flex-col gap-1">
 					<a
-						href="mailto:hello@olonagirl.com"
+						href="mailto:info@olonagirl.com"
 						className="link w-fit text-sm lg:text-base">
-						hello@olonagirl.com
+						info@olonagirl.com
 					</a>
-					<a href="tel:+1800656624475" className="link w-fit text-sm lg:text-base">
-						+1 800 6566 24475
+					<a href="tel:+2348027599400 " className="link w-fit text-sm lg:text-base">
+						+234 802 759 9400
 					</a>
 					<div className="mt-10 flex flex-col">
-						OlonaGirl <br />
-						100, W. Main St, 2nd Floor
+						22 Alhaji Musa Ibraheem Street ,
 						<br />
-						Washington DC 20019-4600 <br />
-						USA <br />
+						Idimu, Lagos,
+						<br />
+						Nigeria. <br />
 					</div>
 				</div>
 			</section>

@@ -54,6 +54,7 @@ const Cart = (props: Props) => {
 						<Link
 							href="/products"
 							prefetch
+							onClick={props.onClose}
 							className="flex h-[40px] w-full items-center justify-center bg-accent text-sm text-light">
 							Continue shopping
 						</Link>

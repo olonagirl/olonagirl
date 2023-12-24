@@ -1,8 +1,8 @@
 export const MiscData = [
 	{
-		heading: "14-day Return",
+		heading: "3-day Return",
 		content:
-			"Try out new items, without the risk. Items can be returned for full refund or store credit.",
+			"We accept returns of any of our items clothing, hair or accessories that is unworn and still fitted with all security tags and labels if the wrong item or size was originally sent.",
 	},
 	{
 		heading: "Worldwide delivery",
