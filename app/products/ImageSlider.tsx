@@ -1,6 +1,6 @@
 "use client"
-import { ArrowLeft, ArrowRight } from "@phosphor-icons/react"
 import { Asset } from "@chec/commerce.js/types/asset"
+import { Dialog } from "@headlessui/react"
 import { useState } from "react"
 import Image from "next/image"
 
@@ -9,47 +9,69 @@ interface Props {
 }
 
 const ImageSlider = (props: Props) => {
+	const [fullscreen, setFullscreen] = useState<number | null>(null)
 	const [current, setCurrent] = useState(0)
 
-	const handleNext = () =>
-		current === props.assets.length - 1 ? setCurrent(0) : setCurrent(current + 1)
-
-	const handlePrev = () =>
-		current === 0 ? setCurrent(props.assets.length - 1) : setCurrent(current - 1)
-
 	return (
-		<div className="flex w-full flex-col items-center gap-4">
-			<div className="group relative aspect-square w-full overflow-hidden">
-				{props.assets.map((asset, index) => (
-					<Image
-						src={asset.url}
-						alt={asset.filename}
-						key={asset.id}
-						fill
-						sizes="(max-width: 1024px) 100%,"
-						priority
-						className={`object-cover transition-all duration-300 ${
-							index === current ? "block scale-105 opacity-100" : "hidden opacity-0"
-						}`}
-					/>
-				))}
+		<>
+			{fullscreen !== null && (
+				<Dialog open={fullscreen !== null} onClose={() => setFullscreen(null)}>
+					<Dialog.Panel
+						onClick={() => setFullscreen(null)}
+						className="fixed left-0 top-0 !z-20 grid h-full w-full place-items-center bg-black/40 py-10 backdrop-blur-sm">
+						<div className="relative aspect-[2/3] h-full">
+							<Image
+								src={props.assets[fullscreen].url}
+								alt={props.assets[fullscreen].filename}
+								fill
+								sizes="(max-width: 1024px) 100%,"
+								priority
+								className="object-fit"
+							/>
+						</div>
+					</Dialog.Panel>
+				</Dialog>
+			)}
+			<div className="flex w-full items-start gap-2">
+				<div className="flex w-[50px] flex-col items-center gap-1 lg:w-[75px]">
+					{props.assets.map((asset, index) => (
+						<div
+							key={asset.id}
+							className="relative aspect-[2/3] w-full overflow-hidden">
+							<Image
+								src={asset.url}
+								alt={asset.filename}
+								key={asset.id}
+								fill
+								id={`product-image-${index}`}
+								sizes="(max-width: 1024px) 100%,"
+								priority
+								onClick={() => setCurrent(index)}
+								className="object-fit cursor-pointer"
+							/>
+						</div>
+					))}
+				</div>
+				<div className="flex flex-1 flex-col items-center gap-4">
+					<div className="relative aspect-[5/6] w-full overflow-hidden">
+						{props.assets.map((asset, index) => (
+							<Image
+								src={asset.url}
+								alt={asset.filename}
+								key={asset.id}
+								fill
+								sizes="(max-width: 1024px) 100%,"
+								priority
+								onClick={() => setFullscreen(index)}
+								className={`cursor-zoom-in object-cover transition-all duration-300 ${
+									index === current ? "block scale-105 opacity-100" : "hidden opacity-0"
+								}`}
+							/>
+						))}
+					</div>
+				</div>
 			</div>
-			<div className="flex w-full items-center justify-center gap-4 px-2 lg:gap-6">
-				<button
-					onClick={handlePrev}
-					className="bg-dark p-1 text-sm text-light lg:p-2 lg:text-base">
-					<ArrowLeft />
-				</button>
-				<p className="text-sm font-light lg:text-base">
-					{current + 1} / {props.assets.length}
-				</p>
-				<button
-					onClick={handleNext}
-					className="bg-dark p-1 text-sm text-light lg:p-2 lg:text-base">
-					<ArrowRight />
-				</button>
-			</div>
-		</div>
+		</>
 	)
 }
 

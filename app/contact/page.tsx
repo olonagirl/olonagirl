@@ -5,7 +5,7 @@ const Contact = () => {
 		<main className="w-full px-5 py-10 lg:px-20 lg:py-20">
 			<p className="my-4 text-2xl lg:text-4xl">Contact</p>
 			<hr className="my-4 w-full bg-dark" />
-			<section className="mb-16 mt-5 grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-0">
+			<section className="mb-16 mt-5 grid h-[50vh] w-full grid-cols-1 gap-10 lg:h-auto lg:grid-cols-2 lg:gap-0">
 				<p className="w-full text-sm lg:w-2/3 lg:text-base">
 					We would love to hear from you. Please reach out to the OlonaGirl customer
 					service team through email or phone. Please also check our{" "}

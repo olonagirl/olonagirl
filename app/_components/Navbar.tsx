@@ -56,7 +56,7 @@ const Navbar = () => {
 			)}
 			<Dialog open={open} onClose={() => setOpen(false)}>
 				<Dialog.Panel className="fixed left-0 top-0 grid h-full w-full place-items-center bg-black/40 backdrop-blur-sm">
-					<div className="w-max-[90%] flex w-[500px] flex-col rounded bg-white p-4">
+					<div className="flex w-[90%] flex-col rounded bg-white p-4 lg:w-[500px]">
 						<div className="flex w-full items-center justify-between">
 							<p className="text-sm font-medium lg:text-base">Search</p>
 							<button onClick={() => setOpen(false)}>
@@ -85,7 +85,7 @@ const Navbar = () => {
 							href={item.href}
 							prefetch
 							className={`link text-xs font-semibold capitalize lg:text-sm ${
-								pathname === item.href ? "text-main" : "text-dark"
+								pathname === item.href ? "text-dark" : "text-gray-500"
 							}`}>
 							{item.label}
 						</Link>
@@ -140,11 +140,11 @@ const Navbar = () => {
 					</button>
 				</div>
 				<div
-					className={`absolute left-0 top-full block w-full gap-2 bg-white transition-all duration-100 lg:hidden ${
-						menuOpen ? "h-auto p-4" : "h-0 p-0"
+					className={`absolute left-0 top-full block w-full gap-2 bg-white transition-all duration-300 lg:hidden ${
+						menuOpen ? "h-auto" : "h-0"
 					}`}>
 					{menuOpen && (
-						<div className="flex w-full flex-col gap-2">
+						<div className="flex w-full flex-col gap-2 p-4">
 							{NavLinkData.map((item, index) => (
 								<Link
 									key={index}
