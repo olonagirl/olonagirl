@@ -1,4 +1,5 @@
 "use client"
+import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react"
 import React from "react"
 
 interface Props {
@@ -23,28 +24,23 @@ const Pagination = (props: Props) => {
 		}
 	}
 
-	const renderPageNumbers = () => {
-		const pageNumbers = []
-		for (let i = 1; i <= totalPages; i++) {
-			pageNumbers.push(
-				<li
-					key={i}
-					onClick={() => props.onPageChange(i)}
-					className={`flex cursor-pointer items-center justify-center rounded px-1 font-light ${
-						props.current === i ? "bg-dark text-light" : "text-dark"
-					}`}>
-					{i}
-				</li>
-			)
-		}
-		return pageNumbers
-	}
-
 	return (
-		<div className="flex w-full items-center justify-between">
-			<button onClick={goToPrev} className=""></button>
-			<ul className="flex items-center gap-1">{renderPageNumbers()}</ul>
-			<button onClick={goToNext} className=""></button>
+		<div className="my-5 flex w-full items-center justify-center gap-2 lg:gap-5">
+			<button
+				onClick={goToPrev}
+				className="rounded bg-dark px-2 py-1 text-sm text-light lg:text-base"
+				disabled={props.current === 1}>
+				<RiArrowLeftSLine />
+			</button>
+			<p className="text-sm font-light lg:text-base">
+				{props.current} / {totalPages}
+			</p>
+			<button
+				onClick={goToNext}
+				className="rounded bg-dark px-2 py-1 text-sm text-light lg:text-base"
+				disabled={props.current === totalPages}>
+				<RiArrowRightSLine />
+			</button>
 		</div>
 	)
 }

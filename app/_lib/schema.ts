@@ -31,3 +31,17 @@ export const SignupSchema = Yup.object({
 		)
 		.required("Password is required!"),
 })
+
+export const CheckoutSchema = Yup.object({
+	first_name: Yup.string().required("First name is required!"),
+	last_name: Yup.string().required("Last name is required!"),
+	email: Yup.string()
+		.email("Please enter a valid email!")
+		.required("Email is required!"),
+	address1: Yup.string().required("Address is required!"),
+	city: Yup.string().required("City is required!"),
+	zip: Yup.string().optional(),
+	shippingCountry: Yup.string().required("Country is required!"),
+	shippingSubdivision: Yup.string().required("State is required!"),
+	shippingOption: Yup.string().required("Shipping option is required!"),
+})

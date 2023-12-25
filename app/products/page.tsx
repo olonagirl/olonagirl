@@ -1,12 +1,38 @@
-import React from "react"
+"use client"
+import { ProductCollection } from "@chec/commerce.js/features/products"
+import { useEffect, useState } from "react"
 
-import { ProductCard } from "../_components"
+import { Loader, Pagination, ProductCard } from "../_components"
 import { commerce } from "../_lib/commerce"
 
-const Products = async () => {
-	const collection = await commerce.products.list()
+const Products = () => {
+	const [collection, setCollection] = useState<ProductCollection | null>(null)
+	const [page, setPage] = useState(1)
 
-	if (!collection) return null
+	const getCollection = async () =>
+		setCollection(await commerce.products.list({ page, limit: 20 }))
+
+	const onPageChange = (page: number) => setPage(page)
+
+	const handlePagination = () => {
+		if (collection && collection.meta.pagination.total > 20) {
+			return (
+				<Pagination
+					current={page}
+					onPageChange={onPageChange}
+					pageSize={20}
+					total={collection.meta.pagination.total}
+				/>
+			)
+		} else return null
+	}
+
+	useEffect(() => {
+		getCollection()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page])
+
+	if (!collection) return <Loader />
 
 	return (
 		<main className="flex w-full flex-col px-5 py-10 lg:px-20">
@@ -17,6 +43,7 @@ const Products = async () => {
 					<ProductCard key={product.id} {...product} />
 				))}
 			</section>
+			{handlePagination()}
 		</main>
 	)
 }

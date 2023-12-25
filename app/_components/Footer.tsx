@@ -41,7 +41,7 @@ const Footer = () => {
 									<Link
 										href={link.href}
 										key={idx}
-										className="text-xs text-gray-300 transition-colors duration-300 hover:text-gray-400 lg:text-sm">
+										className="w-fit text-xs text-gray-300 transition-colors duration-300 hover:text-gray-400 lg:text-sm">
 										{link.label}
 									</Link>
 								))}

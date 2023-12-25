@@ -1,20 +1,13 @@
 import React from "react"
 
-import { commerce } from "../_lib/commerce"
-
-const Categories = async () => {
-	const categories = await commerce.categories.list()
-
+const Page = () => {
 	return (
-		<main className="">
-			<p></p>
-			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-20">
-				{categories.data.map((category) => (
-					<div key={category.id}>{category.name}</div>
-				))}
-			</section>
+		<main className="flex w-full flex-col px-5 py-10 lg:px-20">
+			<p className="my-4 text-2xl lg:text-4xl">Categories</p>
+			<hr className="my-4 w-full bg-dark" />
+			<section className="my-5 grid w-full grid-cols-2 gap-4 lg:grid-cols-4"></section>
 		</main>
 	)
 }
 
-export default Categories
+export default Page

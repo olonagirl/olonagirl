@@ -1,12 +1,14 @@
 "use client"
+import { Dispatch, SetStateAction, useState } from "react"
 import { Minus, Plus, X } from "@phosphor-icons/react"
 import { Cart } from "@chec/commerce.js/types/cart"
-import { Dispatch, SetStateAction } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 
 import { commerce } from "../_lib/commerce"
+import { LoadingProps } from "../_types"
+import Spinner from "./Spinner"
 
 interface Props {
 	cart: Cart | null
@@ -15,14 +17,20 @@ interface Props {
 }
 
 const Cart = (props: Props) => {
+	const [loading, setLoading] = useState<LoadingProps>("none")
+
 	const handleRemoveFromCart = async (productId: string) => {
+		setLoading("remove")
 		const { cart } = await commerce.cart.remove(productId)
 		props.setCart(cart)
+		setLoading("none")
 	}
 
 	const handleUpdateCart = async (productId: string, quantity: number) => {
+		setLoading("update")
 		const { cart } = await commerce.cart.update(productId, { quantity })
 		props.setCart(cart)
+		setLoading("none")
 	}
 
 	if (!props.cart) return null
@@ -83,26 +91,36 @@ const Cart = (props: Props) => {
 										/>
 									</div>
 									<div className="flex flex-1 flex-col gap-1">
-										<p className="text-xs font-semibold lg:text-sm">{item.name}</p>
+										<p className="text-xs font-semibold capitalize lg:text-sm">
+											{item.name}
+										</p>
 										<p className="text-xs font-light lg:text-sm">
 											{item.line_total.formatted_with_symbol}
 										</p>
-										<div className="flex items-center gap-2">
-											<button
-												onClick={() => handleUpdateCart(item.id, item.quantity - 1)}
-												className="rounded-full bg-dark p-1 text-white">
-												<Minus className="text-10px] lg:text-xs" />
-											</button>
-											<p className="text-[10px] lg:text-xs">{item.quantity}</p>
-											<button
-												onClick={() => handleUpdateCart(item.id, item.quantity + 1)}
-												className="rounded-full bg-dark p-1 text-white">
-												<Plus className="text-10px] lg:text-xs" />
-											</button>
+										<div className="flex items-center gap-4">
+											<div className="flex items-center gap-3">
+												<button
+													onClick={() => handleUpdateCart(item.id, item.quantity - 1)}
+													className="rounded-full bg-dark p-1 text-white">
+													<Minus className="text-[10px] lg:text-xs" />
+												</button>
+												<div className="text-[10px] lg:text-xs">
+													{loading === "update" ? (
+														<Spinner color="border-dark" />
+													) : (
+														item.quantity
+													)}
+												</div>
+												<button
+													onClick={() => handleUpdateCart(item.id, item.quantity + 1)}
+													className="rounded-full bg-dark p-1 text-white">
+													<Plus className="text-[10px] lg:text-xs" />
+												</button>
+											</div>
 											<button
 												onClick={() => handleRemoveFromCart(item.id)}
-												className="text-[10px] underline lg:text-xs">
-												Remove
+												className="text-xs underline lg:text-sm">
+												{loading === "remove" ? <Spinner color="border-dark" /> : "Remove"}
 											</button>
 										</div>
 									</div>
