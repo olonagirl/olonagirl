@@ -2,11 +2,14 @@
 import { Product } from "@chec/commerce.js/types/product"
 import { RiShareLine } from "@remixicon/react"
 import { stripHtml } from "string-strip-html"
+import { Info } from "@phosphor-icons/react"
 import { useEffect, useState } from "react"
+import Link from "next/link"
 
-import { Button, Input, Loader, Spinner } from "@/app/_components"
+import { Button, Input, Loader, Spinner } from "../../_components"
 import { commerce } from "../../_lib/commerce"
 import ImageSlider from "../ImageSlider"
+import { capitalize } from "../../_lib"
 
 interface Props {
 	params: {
@@ -34,11 +37,12 @@ const Product = ({ params: { id } }: Props) => {
 	}
 
 	const share = () => {
-		if (navigator.share) {
+		if (product && navigator.share) {
 			navigator.share({
-				title: product?.name,
-				text: stripHtml(product?.description || "").result,
+				title: capitalize(product.name),
+				text: stripHtml(product.description).result,
 				url: window.location.href,
+				files: [],
 			})
 		}
 	}
@@ -88,6 +92,15 @@ const Product = ({ params: { id } }: Props) => {
 									</Input>
 								</div>
 							))}
+							<div className="my-2 flex w-full items-center justify-end">
+								<Link
+									href="/size-guide"
+									prefetch
+									className="flex items-center gap-1 text-xs underline lg:text-sm">
+									<Info className="text-sm lg:text-base" />
+									Size Guide
+								</Link>
+							</div>
 							<Button
 								type="button"
 								onClick={() => handleAddToCart(product.id, 1)}
@@ -123,7 +136,7 @@ const Product = ({ params: { id } }: Props) => {
 			</section>
 			<section className="mt-10 flex w-full flex-col gap-4 lg:mt-20">
 				<p className="text-sm font-semibold lg:text-xl">Related products</p>
-				<div className="my-4 flex min-h-[500px] w-full items-center py-5"></div>
+				<div className="my-4 flex min-h-[300px] w-full items-center py-5"></div>
 			</section>
 		</main>
 	)

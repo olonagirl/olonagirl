@@ -34,7 +34,7 @@ const Footer = () => {
 				</div>
 				<div className="flex flex-1 flex-wrap items-start justify-between gap-10 lg:w-max lg:justify-start lg:gap-32">
 					{FooterData.map((item, index) => (
-						<div key={index} className="flex min-w-[200px] flex-col gap-4">
+						<div key={index} className="flex min-w-[250px] flex-col gap-4">
 							<p className="text-base font-light lg:text-lg">{item.header}</p>
 							<div className="flex flex-col gap-2">
 								{item.links.map((link, idx) => (
