@@ -17,6 +17,9 @@ dependencies:
   '@remixicon/react':
     specifier: ^4.0.1
     version: 4.0.1(react@18.2.0)
+  '@vercel/speed-insights':
+    specifier: ^1.0.2
+    version: 1.0.2
   formik:
     specifier: ^2.4.5
     version: 2.4.5(react@18.2.0)
@@ -35,6 +38,9 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
+  react-paystack:
+    specifier: ^4.0.3
+    version: 4.0.3(react-dom@18.2.0)(react@18.2.0)
   string-strip-html:
     specifier: ^13.4.3
     version: 13.4.3
@@ -739,6 +745,11 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
+
+  /@vercel/speed-insights@1.0.2:
+    resolution: {integrity: sha512-y5HWeB6RmlyVYxJAMrjiDEz8qAIy2cit0fhBq+MD78WaUwQvuBnQlX4+5MuwVTWi46bV3klaRMq83u9zUy1KOg==}
+    requiresBuild: true
+    dev: false
 
   /@zkochan/retry@0.2.0:
     resolution: {integrity: sha512-WhB+2B/ZPlW2Xy/kMJBrMbqecWXcbDDgn0K0wKBAgO2OlBTz1iLJrRWduo+DGGn0Akvz1Lu4Xvls7dJojximWw==}
@@ -3257,6 +3268,16 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-paystack@4.0.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ruu94Qrvi7QHK1axrHRShUebka68G3UyGIndVFPCjs3rddBOkLiorF6GJ98FW9lq4ov5M4adh4g03F6aOuJmRA==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

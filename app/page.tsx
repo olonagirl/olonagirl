@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { TestimonialData } from "./_assets/testimonial-data"
 import { CarouselData } from "./_assets/carousel-data"
 import { MiscData } from "./_assets/misc-data"
@@ -12,8 +14,9 @@ import {
 
 const Home = async () => {
 	const collection = await commerce.products.list().then((data) => data)
+	const categories = await commerce.categories.list().then((data) => data)
 
-	if (!collection) return null
+	if (!collection || !categories) return null
 
 	return (
 		<main className="w-full bg-light">
@@ -27,12 +30,26 @@ const Home = async () => {
 			</section>
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
+				<p className="mb-5 text-2xl lg:text-4xl">Explore the store</p>
+				<div className="flex w-full flex-wrap items-center justify-center gap-4">
+					{categories.data.map((category) => (
+						<Link
+							href={`/categories/${category.slug}`}
+							key={category.slug}
+							prefetch
+							className="rounded p-2 text-lg capitalize hover:bg-gray-300 lg:text-xl">
+							{category.name}
+						</Link>
+					))}
+				</div>
+			</section>
+			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="mb-5 text-2xl lg:text-4xl">New Arrivals</p>
 				<div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
 					{collection.data
 						.sort((a, b) => b.created - a.created)
 						.map((product) => <ProductCard key={product.id} {...product} />)
-						.slice(0, 12)}
+						.slice(0, 8)}
 				</div>
 			</section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">

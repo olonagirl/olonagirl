@@ -1,40 +1,101 @@
 "use client"
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token"
+import { Cart } from "@chec/commerce.js/types/cart"
+import { PaystackButton } from "react-paystack"
+import { useEffect, useState } from "react"
 import { useFormik } from "formik"
-import { useEffect } from "react"
 
 import { Button, Input } from "../_components"
 import { commerce } from "../_lib/commerce"
+import { ShippingProps } from "../_types"
 
 interface Props {
 	checkoutToken: CheckoutToken
+	cart: Cart
 }
 
 const initialValues = {
 	firstName: "",
 	lastName: "",
 	email: "",
+	phone: "",
 	address1: "",
 	city: "",
 	zip: "",
+	shippingCountry: "",
+	shippingSubdivision: "",
+	shippingOption: "",
 }
 
-const Shipping = ({ checkoutToken }: Props) => {
-	const { handleChange, handleSubmit } = useFormik({
+const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
+	const [subdivisions, setSubdivisions] = useState<ShippingProps[]>([])
+	const [countries, setCountries] = useState<ShippingProps[]>([])
+	const [options, setOptions] = useState<ShippingProps[]>([])
+
+	const { handleChange, handleSubmit, values } = useFormik({
 		initialValues,
 		onSubmit: (data) => console.log(data),
 	})
 
-	const fetchShippingCountries = async (checkoutTokenId: string) => {
-		const { countries } =
-			await commerce.services.localeListShippingCountries(checkoutTokenId)
-		console.log(countries)
+	const fetchShippingCountries = async () => {
+		const { countries } = await commerce.services.localeListShippingCountries(id)
+		const shippingCountries = Object.entries(countries).map(([code, name]) => ({
+			id: code,
+			label: name,
+		}))
+		setCountries(shippingCountries)
+	}
+
+	const fetchShippingSubdivisions = async (country: string) => {
+		const { subdivisions } =
+			await commerce.services.localeListShippingSubdivisions(id, country)
+		const shippingSubdivisions = Object.entries(subdivisions).map(
+			([code, name]) => ({ id: code, label: name })
+		)
+		setSubdivisions(shippingSubdivisions)
+	}
+
+	const fetchShippingOptions = async (country: string, state: string) => {
+		const options = await commerce.checkout.getShippingOptions(id, {
+			country,
+			region: state,
+		})
+		const shippingOptions = options.map((option) => ({
+			id: option.id,
+			label: `${option.description} - ${option.price.formatted_with_symbol}`,
+		}))
+		console.log(shippingOptions)
+		setOptions(shippingOptions)
+	}
+
+	const componentProps = {
+		amount: cart.subtotal.raw * 100,
+		email: values.email,
+		publicKey: String(process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY),
+		firstname: values.firstName,
+		lastname: values.lastName,
+		text: "Pay now",
+		className: "w-full bg-green-700 py-2 text-white",
+		onSuccess: () => console.log("success"),
+		onClose: () => console.log("error"),
+		phone: values.phone,
 	}
 
 	useEffect(() => {
-		fetchShippingCountries(checkoutToken.id)
+		fetchShippingCountries()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	useEffect(() => {
+		if (values.shippingCountry) fetchShippingSubdivisions(values.shippingCountry)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values.shippingCountry])
+
+	useEffect(() => {
+		if (values.shippingSubdivision)
+			fetchShippingOptions(values.shippingCountry, values.shippingSubdivision)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values.shippingSubdivision])
 
 	return (
 		<div className="w-full">
@@ -44,7 +105,13 @@ const Shipping = ({ checkoutToken }: Props) => {
 					as="select"
 					id="shippingCountry"
 					label="Country"
-					onChange={handleChange}></Input>
+					onChange={handleChange}>
+					{countries.map((country) => (
+						<option key={country.id} value={country.id}>
+							{country.label}
+						</option>
+					))}
+				</Input>
 				<div className="flex flex-col items-center gap-4 lg:flex-row">
 					<Input
 						typed="text"
@@ -75,7 +142,13 @@ const Shipping = ({ checkoutToken }: Props) => {
 						id="state"
 						onChange={handleChange}
 						label="State"
-						width="w-full lg:1/2"></Input>
+						width="w-full lg:1/2">
+						{subdivisions.map((subdivision) => (
+							<option key={subdivision.id} value={subdivision.id}>
+								{subdivision.label}
+							</option>
+						))}
+					</Input>
 					<Input
 						typed="text"
 						id="zip"
@@ -93,9 +166,22 @@ const Shipping = ({ checkoutToken }: Props) => {
 				/>
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Shipping method</p>
+				<Input
+					as="select"
+					id="shippingOption"
+					onChange={handleChange}
+					label="Shipping Option"
+					width="w-full">
+					{options.map((option) => (
+						<option key={option.id} value={option.id}>
+							{option.label}
+						</option>
+					))}
+				</Input>
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Payment method</p>
-				<Button type="submit">Review Order</Button>
+				<PaystackButton {...componentProps} />
+				<Button type="submit">Proceed</Button>
 			</form>
 		</div>
 	)

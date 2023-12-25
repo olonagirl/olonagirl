@@ -2,6 +2,8 @@ import React, { ComponentProps } from "react"
 import { StaticImageData } from "next/image"
 import { LinkProps } from "next/link"
 
+export type LoadingProps = "remove" | "update" | "empty" | "none"
+
 export interface TestimonialProps {
 	id: string
 	name: string
@@ -10,8 +12,9 @@ export interface TestimonialProps {
 	rating: number
 }
 
-export interface CountryProps {
-	[name: string]: string
+export interface ShippingProps {
+	id: string
+	label: string
 }
 
 export type InputProps =

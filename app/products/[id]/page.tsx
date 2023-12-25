@@ -1,11 +1,10 @@
 "use client"
-import { RiAddLine, RiShareLine, RiSubtractLine } from "@remixicon/react"
 import { Product } from "@chec/commerce.js/types/product"
-import { Disclosure } from "@headlessui/react"
+import { RiShareLine } from "@remixicon/react"
 import { stripHtml } from "string-strip-html"
 import { useEffect, useState } from "react"
 
-import { Button, Loader, Spinner } from "@/app/_components"
+import { Button, Input, Loader, Spinner } from "@/app/_components"
 import { commerce } from "../../_lib/commerce"
 import ImageSlider from "../ImageSlider"
 
@@ -16,15 +15,22 @@ interface Props {
 }
 
 const Product = ({ params: { id } }: Props) => {
+	const [variants, setVariants] = useState<{ [name: string]: string }>({})
 	const [product, setProduct] = useState<Product | null>(null)
 	const [loading, setLoading] = useState(false)
 
 	const getProduct = async () => setProduct(await commerce.products.retrieve(id))
 
 	const handleAddToCart = async (productId: string, quantity: number) => {
+		if (product && product.variant_groups.length > 0 && !variants)
+			return alert("Please select a variant")
 		setLoading(true)
-		await commerce.cart.add(productId, quantity)
+		await commerce.cart.add(productId, quantity, variants)
 		setLoading(false)
+	}
+
+	const handleVariant = (variantId: string, optionId: string) => {
+		setVariants((variants) => ({ ...variants, [variantId]: optionId }))
 	}
 
 	const share = () => {
@@ -42,24 +48,18 @@ const Product = ({ params: { id } }: Props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	useEffect(() => {
-		if (product) {
-			console.log(product.variant_groups)
-		}
-	}, [product])
-
 	if (!product) return <Loader />
 
 	return (
 		<main className="w-full px-5 py-10 lg:px-20">
 			<section className="flex w-full flex-col items-center gap-4">
-				<div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
+				<div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-10">
 					<div className="flex w-full flex-col">
 						<ImageSlider assets={product.assets} />
 					</div>
 					<div className="flex w-full flex-col">
 						<p className="text-xs capitalize text-gray-400 lg:text-sm">
-							{product.categories[0].name}
+							{product.categories[0].name} /
 						</p>
 						<div className="flex w-full items-center justify-between">
 							<p className="my-3 text-base capitalize lg:text-2xl">{product.name}</p>
@@ -76,16 +76,16 @@ const Product = ({ params: { id } }: Props) => {
 									<p className="text-xs font-semibold uppercase lg:text-sm">
 										{group.name}
 									</p>
-									<div className="flex items-center gap-2">
+									<Input
+										as="select"
+										onChange={(e) => handleVariant(group.id, e.target.value)}
+										width="w-1/3 lg:w-[200px]">
 										{group.options.map((option) => (
-											<label
-												key={option.id}
-												className="flex items-center gap-1 font-light capitalize text-[8p] lg:text-[10px]">
-												<input type="radio" name={group.name} value={option.name} id="" />
+											<option key={option.id} value={option.id}>
 												{option.name}
-											</label>
+											</option>
 										))}
-									</div>
+									</Input>
 								</div>
 							))}
 							<Button
@@ -103,33 +103,12 @@ const Product = ({ params: { id } }: Props) => {
 									"Sold out"
 								)}
 							</Button>
-							{!product.inventory.available && (
-								<Button
-									type="button"
-									onClick={() => console.log("notify")}
-									width="w-full"
-									background="bg-black">
-									Notify me when available
-								</Button>
-							)}
 						</div>
 						<hr className="my-3 w-full bg-dark" />
-						<Disclosure as="div" className="flex w-full flex-col gap-4">
-							{({ open }) => (
-								<>
-									<Disclosure.Button
-										className={`flex w-full items-center justify-between p-2 ${
-											open ? "bg-transparent text-dark" : "bg-dark text-light"
-										}`}>
-										<p>Description</p>
-										<span>{open ? <RiSubtractLine /> : <RiAddLine />}</span>
-									</Disclosure.Button>
-									<Disclosure.Panel className="px-3 text-xs lg:text-sm">
-										{stripHtml(product.description).result}
-									</Disclosure.Panel>
-								</>
-							)}
-						</Disclosure>
+						<p className="text-sm font-semibold lg:text-base">Description</p>
+						<p className="text-xs lg:text-sm">
+							{stripHtml(product.description).result}
+						</p>
 						<hr className="my-3 w-full bg-dark" />
 						<div className="flex w-full items-center justify-between">
 							<p className="text-xs lg:text-sm">Share</p>

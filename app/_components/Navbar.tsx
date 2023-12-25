@@ -14,7 +14,6 @@ import {
 import { NavLinkData } from "../_assets/navlink-data"
 import HamburgerButton from "./HamburgerButton"
 import { commerce } from "../_lib/commerce"
-import { store } from "../_store"
 import Input from "./Input"
 import MyCart from "./Cart"
 
@@ -29,13 +28,17 @@ const Navbar = () => {
 	const [scrolled, setScrolled] = useState(false)
 	const [cartOpen, setCartOpen] = useState(false)
 	const [menuOpen, setMenuOpen] = useState(false)
+	const [loggedIn, setLoggedIn] = useState(false)
 	const [open, setOpen] = useState(false)
-	const { isAuthenticated } = store()
 	const pathname = usePathname()
 
 	const handleScroll = () => setScrolled(window.scrollY > 300)
 
 	const fetchCart = async () => setCart(await commerce.cart.retrieve())
+
+	useEffect(() => {
+		setLoggedIn(commerce.customer.isLoggedIn())
+	}, [])
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll)
@@ -94,7 +97,7 @@ const Navbar = () => {
 						className="p-[10px] hover:bg-gray-200">
 						<RiSearch2Line className="text-sm lg:text-2xl" />
 					</button>
-					{!isAuthenticated ? (
+					{loggedIn ? (
 						<Menu as="div" className="relative">
 							<Menu.Button className="p-[10px] hover:bg-gray-200">
 								<RiUser3Line className="text-sm lg:text-2xl" />
@@ -140,17 +143,20 @@ const Navbar = () => {
 					className={`absolute left-0 top-full block w-full gap-2 bg-white transition-all duration-100 lg:hidden ${
 						menuOpen ? "h-auto p-4" : "h-0 p-0"
 					}`}>
-					<div className={`w-full flex-col gap-2 ${menuOpen ? "flex" : "hidden"}`}>
-						{NavLinkData.map((item, index) => (
-							<Link
-								key={index}
-								href={item.href}
-								prefetch
-								className="link text-xs font-semibold capitalize lg:text-sm">
-								{item.label}
-							</Link>
-						))}
-					</div>
+					{menuOpen && (
+						<div className="flex w-full flex-col gap-2">
+							{NavLinkData.map((item, index) => (
+								<Link
+									key={index}
+									href={item.href}
+									prefetch
+									onClick={() => setMenuOpen(false)}
+									className="link text-xs font-semibold capitalize lg:text-sm">
+									{item.label}
+								</Link>
+							))}
+						</div>
+					)}
 				</div>
 			</nav>
 		</>

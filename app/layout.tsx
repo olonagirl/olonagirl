@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Space_Grotesk } from "next/font/google"
 import type { Metadata } from "next"
 
@@ -27,6 +28,7 @@ export default function RootLayout({
 				<Navbar />
 				<main className="w-full">{children}</main>
 				<Footer />
+				<SpeedInsights />
 			</body>
 		</html>
 	)

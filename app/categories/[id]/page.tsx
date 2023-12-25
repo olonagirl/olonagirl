@@ -1,48 +1,60 @@
-import { stripHtml } from "string-strip-html"
-import Image from "next/image"
+"use client"
+import { ProductCollection } from "@chec/commerce.js/features/products"
+import { useEffect, useState } from "react"
 
-import { ProductCard } from "../../_components"
+import { Loader, Pagination, ProductCard } from "../../_components"
 import { commerce } from "../../_lib/commerce"
+import { normalizeString } from "../../_lib"
 
 interface Props {
 	params: {
 		id: string
-		slug: string
 	}
 }
 
-const Category = async ({ params: { id } }: Props) => {
-	const category = await commerce.categories.retrieve(id)
-	const products = await commerce.products.list({ category: category.id })
+const Page = ({ params: { id } }: Props) => {
+	const [collection, setCollection] = useState<ProductCollection | null>(null)
+	const [page, setPage] = useState(1)
 
-	if (!category) return null
+	const getProducts = async () =>
+		setCollection(
+			await commerce.products.list({ category_slug: id, page, limit: 20 })
+		)
+
+	const onPageChange = (page: number) => setPage(page)
+
+	const handlePagination = () => {
+		if (collection && collection.meta.pagination.total > 20) {
+			return (
+				<Pagination
+					current={page}
+					onPageChange={onPageChange}
+					pageSize={20}
+					total={collection.meta.pagination.total}
+				/>
+			)
+		} else return null
+	}
+
+	useEffect(() => {
+		getProducts()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id, page])
+
+	if (!collection) return <Loader />
 
 	return (
-		<>
-			<section className="flex w-full flex-col items-start gap-4 px-5 py-10 lg:flex-row lg:px-20">
-				<div className="relative aspect-[3/2] w-full lg:w-1/4">
-					<Image
-						src=""
-						alt={category.name}
-						fill
-						sizes="(max-width: 1024px) 100%,"
-						priority
-					/>
-				</div>
-				<div className="flex w-full flex-col gap-2 lg:w-3/4">
-					<p className="text-lg lg:text-2xl">{category.name}</p>
-					<p className="text-xs lg:text-base">
-						{stripHtml(category.description).result}
-					</p>
-				</div>
-			</section>
-			<section className="grid w-full grid-cols-2 gap-2 px-5 py-20 lg:grid-cols-5 lg:gap-5 lg:px-20">
-				{products.data.map((product) => (
+		<main className="flex w-full flex-col px-5 py-10 lg:px-20">
+			<p className="my-4 text-2xl capitalize lg:text-4xl">{normalizeString(id)}</p>
+			<hr className="my-4 w-full bg-dark" />
+			<section className="my-5 grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
+				{collection.data.map((product) => (
 					<ProductCard key={product.id} {...product} />
 				))}
 			</section>
-		</>
+			{handlePagination()}
+		</main>
 	)
 }
 
-export default Category
+export default Page
