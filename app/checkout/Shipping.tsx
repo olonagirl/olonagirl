@@ -15,8 +15,8 @@ interface Props {
 }
 
 const initialValues = {
-	firstName: "",
-	lastName: "",
+	firstname: "",
+	lastname: "",
 	email: "",
 	phone: "",
 	address1: "",
@@ -72,8 +72,8 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 		amount: cart.subtotal.raw * 100,
 		email: values.email,
 		publicKey: String(process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY),
-		firstname: values.firstName,
-		lastname: values.lastName,
+		firstname: values.firstname,
+		lastname: values.lastname,
 		text: "Pay now",
 		className: "w-full bg-green-700 py-2 text-white",
 		onSuccess: () => console.log("success"),
@@ -115,14 +115,14 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 				<div className="flex flex-col items-center gap-4 lg:flex-row">
 					<Input
 						typed="text"
-						id="firstName"
+						id="firstname"
 						onChange={handleChange}
 						label="First Name"
 						width="w-full lg:w-1/2"
 					/>
 					<Input
 						typed="text"
-						id="lastName"
+						id="lastname"
 						onChange={handleChange}
 						label="Last Name"
 						width="w-full lg:w-1/2"
