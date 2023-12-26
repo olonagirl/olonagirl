@@ -40,7 +40,7 @@ const Product = ({ params: { id } }: Props) => {
 		if (product && navigator.share) {
 			navigator.share({
 				title: capitalize(product.name),
-				text: stripHtml(product.description).result,
+				text: capitalize(product.name),
 				url: window.location.href,
 				files: [],
 			})
