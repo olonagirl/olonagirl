@@ -1,24 +1,34 @@
 "use client"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { useRouter } from "next/navigation"
 import { useFormik } from "formik"
 import Link from "next/link"
 
 import { Button, Input } from "../../_components"
 import { SignupSchema } from "../../_lib/schema"
-// import { commerce } from "../_lib/commerce"
 
 const initialValues = {
 	email: "",
-	firstname: "",
-	lastname: "",
+	name: "",
 	phone: "",
 	password: "",
 }
 
 const Signup = () => {
+	const supabase = createClientComponentClient()
+	const { push } = useRouter()
+
 	const { errors, handleChange, handleSubmit } = useFormik({
 		initialValues,
 		validationSchema: SignupSchema,
-		onSubmit: (data) => console.log(data),
+		onSubmit: async (values) => {
+			const { error } = await supabase.auth.signUp({ ...values })
+			if (!error) {
+				push("/account/signin")
+			} else {
+				console.log(error.message)
+			}
+		},
 	})
 
 	return (
@@ -27,23 +37,16 @@ const Signup = () => {
 				<p className="my-4 text-2xl lg:text-4xl">Create account</p>
 				<hr className="my-4 w-full bg-dark" />
 				<div className="my-10 w-full">
-					<form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
+					<form
+						onSubmit={handleSubmit}
+						className="flex w-full flex-col gap-4 lg:mb-10">
 						<Input
 							typed="text"
-							id="firstname"
+							id="name"
 							onChange={handleChange}
-							label="First Name"
-							error={errors.firstname}
-							placeholder="Password"
-							width="w-full lg:w-[350px]"
-						/>
-						<Input
-							typed="text"
-							id="lastname"
-							onChange={handleChange}
-							label="Last Name"
-							error={errors.lastname}
-							placeholder="Password"
+							label="Display Name"
+							error={errors.name}
+							placeholder="First Name"
 							width="w-full lg:w-[350px]"
 						/>
 						<Input
@@ -79,7 +82,7 @@ const Signup = () => {
 					</form>
 					<p className="mt-10 flex items-center">
 						Have an account already?
-						<Link href="/account/signin" prefetch className="link ml-1 text-main">
+						<Link href="/account/signin" prefetch className="ml-1 underline">
 							Sign in
 						</Link>
 					</p>

@@ -1,0 +1,1 @@
+SUPABASE_PASSWORD="Ry8jH6RAg3vzpsf$"

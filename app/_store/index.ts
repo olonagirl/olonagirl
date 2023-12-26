@@ -1,10 +1,11 @@
-import { Customer } from "@chec/commerce.js/types/customer"
+import type { Session, User } from "@supabase/auth-helpers-nextjs"
 import { persist } from "zustand/middleware"
 import { create } from "zustand"
 
 interface Store {
-	user: Customer | null
-	login: (payload: Customer) => void
+	user: User | null
+	session: Session | null
+	login: (user: User, session: Session) => void
 	logout: () => void
 }
 
@@ -12,8 +13,9 @@ export const store = create<Store>()(
 	persist(
 		(set) => ({
 			user: null,
-			login: (payload) => set(() => ({ user: payload, isAuthenticated: true })),
-			logout: () => set(() => ({ user: null, isAuthenticated: false })),
+			session: null,
+			login: (user, session) => set(() => ({ user, session })),
+			logout: () => set(() => ({ user: null, session: null })),
 		}),
 		{ name: "store" }
 	)

@@ -1,28 +1,43 @@
 "use client"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import { useRouter } from "next/navigation"
 import { useFormik } from "formik"
+import { useState } from "react"
 import Link from "next/link"
 
-import { Button, Input } from "../../_components"
-import { SigninSchema } from "@/app/_lib/schema"
-import { commerce } from "../../_lib/commerce"
+import { Button, Input, Spinner } from "../../_components"
+import { SigninSchema } from "../../_lib/schema"
 import { store } from "../../_store"
 
 const initialValues = { email: "", password: "" }
 
 const Signin = () => {
-	const { login } = store()
+	const supabase = createClientComponentClient()
+	const [loading, setLoading] = useState(false)
+	const { login, user } = store()
+	const { push } = useRouter()
 
 	const { errors, handleChange, handleSubmit } = useFormik({
 		initialValues,
 		validationSchema: SigninSchema,
-		onSubmit: async (data) => {
-			const token = await commerce.customer.login(data.email, "")
-			if (token.success) {
-				const user = await commerce.customer.about()
-				login(user)
+		onSubmit: async ({ email, password }) => {
+			setLoading(true)
+			const { data, error } = await supabase.auth.signInWithPassword({
+				email,
+				password,
+			})
+			if (!error) {
+				const { session, user } = data
+				login(user, session)
+				push("/")
+			} else {
+				console.log(error.message)
 			}
+			setLoading(false)
 		},
 	})
+
+	if (user) push("/")
 
 	return (
 		<main className="flex w-full flex-col items-center gap-4 px-5 py-10 lg:px-20 lg:py-20">
@@ -49,13 +64,13 @@ const Signin = () => {
 							placeholder="Password"
 							width="w-full lg:w-[350px]"
 						/>
-						<Button type="submit" width="w-full lg:w-[350px]">
-							Signin
+						<Button type="submit" disabled={loading} width="w-full lg:w-[350px]">
+							{loading ? <Spinner /> : "Signin"}
 						</Button>
 					</form>
 					<p className="mt-10 flex items-center">
 						Don&apos;t have an account?
-						<Link href="/account/signup" prefetch className="link ml-1 text-main">
+						<Link href="/account/signup" prefetch className="ml-1 underline">
 							Sign up
 						</Link>
 					</p>

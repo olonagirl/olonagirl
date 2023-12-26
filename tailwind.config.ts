@@ -7,9 +7,6 @@ const config: Config = {
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		fontFamily: {
-			vanity: ["Vanity"],
-		},
 		extend: {
 			backgroundImage: {
 				"fixed-1": "url('/images/fixed-1.jpg')",
@@ -26,4 +23,5 @@ const config: Config = {
 	},
 	plugins: [],
 }
+
 export default config

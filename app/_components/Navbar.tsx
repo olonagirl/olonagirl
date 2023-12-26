@@ -14,6 +14,7 @@ import {
 import { NavLinkData } from "../_assets/navlink-data"
 import HamburgerButton from "./HamburgerButton"
 import { commerce } from "../_lib/commerce"
+import { store } from "../_store"
 import Input from "./Input"
 import MyCart from "./Cart"
 
@@ -28,17 +29,13 @@ const Navbar = () => {
 	const [scrolled, setScrolled] = useState(false)
 	const [cartOpen, setCartOpen] = useState(false)
 	const [menuOpen, setMenuOpen] = useState(false)
-	const [loggedIn, setLoggedIn] = useState(false)
 	const [open, setOpen] = useState(false)
 	const pathname = usePathname()
+	const { user } = store()
 
 	const handleScroll = () => setScrolled(window.scrollY > 300)
 
 	const fetchCart = async () => setCart(await commerce.cart.retrieve())
-
-	useEffect(() => {
-		setLoggedIn(commerce.customer.isLoggedIn())
-	}, [])
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll)
@@ -75,7 +72,7 @@ const Navbar = () => {
 				<div className="flex items-center gap-4">
 					<HamburgerButton open={menuOpen} setOpen={setMenuOpen} />
 					<Link href="/" className="text-xl font-semibold lg:text-2xl">
-						OlonaGirl
+						Olonagirl
 					</Link>
 				</div>
 				<div className="hidden items-center gap-4 lg:flex">
@@ -94,12 +91,15 @@ const Navbar = () => {
 				<div className="flex items-center">
 					<button
 						onClick={() => setOpen(true)}
+						aria-label="search-button"
 						className="p-[10px] hover:bg-gray-200">
 						<RiSearch2Line className="text-sm lg:text-2xl" />
 					</button>
-					{loggedIn ? (
+					{user ? (
 						<Menu as="div" className="relative">
-							<Menu.Button className="p-[10px] hover:bg-gray-200">
+							<Menu.Button
+								aria-label="user account"
+								className="p-[10px] hover:bg-gray-200">
 								<RiUser3Line className="text-sm lg:text-2xl" />
 							</Menu.Button>
 							<Menu.Items className="absolute left-0 top-full !z-10 flex flex-col gap-2 rounded border bg-white p-4 shadow-xl">
@@ -123,12 +123,14 @@ const Navbar = () => {
 						<Link
 							href="/account/signin"
 							prefetch
+							aria-label="user signin"
 							className="p-[10px] hover:bg-gray-200">
 							<RiUser3Line className="text-sm lg:text-2xl" />
 						</Link>
 					)}
 					<button
 						className="p-[10px] hover:bg-gray-200"
+						aria-label="cart"
 						onClick={() => setCartOpen(!cartOpen)}>
 						{cart?.total_items ? (
 							<p className="bg-dark px-3 py-1 text-xs text-light lg:text-sm">

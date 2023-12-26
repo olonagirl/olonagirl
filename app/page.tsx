@@ -20,13 +20,8 @@ const Home = async () => {
 
 	return (
 		<main className="w-full bg-light">
-			<section className="relative h-[95dvh] w-full bg-transparent lg:h-[95dvh]">
+			<section className="h-[95vh] w-full lg:h-[95vh]">
 				<Carousel data={CarouselData} />
-				<div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-black/50 py-20">
-					<p className="font-vanity text-8xl font-extralight text-main lg:text-[250px]">
-						OlonaGirl
-					</p>
-				</div>
 			</section>
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
@@ -37,7 +32,7 @@ const Home = async () => {
 							href={`/categories/${category.slug}`}
 							key={category.slug}
 							prefetch
-							className="rounded p-2 text-lg capitalize hover:bg-gray-300 lg:text-xl">
+							className="rounded bg-gray-300 p-2 text-lg capitalize hover:bg-gray-400 lg:text-xl">
 							{category.name}
 						</Link>
 					))}
@@ -76,7 +71,7 @@ const Home = async () => {
 			</section>
 			<section className="h-[75vh] w-full bg-dark/75 bg-fixed-1 bg-cover bg-fixed bg-center bg-blend-multiply"></section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
-				<p className="w-full text-center text-base lg:w-1/3 lg:text-xl">
+				<p className="w-full text-center text-base lg:w-1/2 lg:text-xl">
 					Subscribe to our newsletter and never miss a thing. We will bring you the
 					latest in the world of fashion.
 				</p>

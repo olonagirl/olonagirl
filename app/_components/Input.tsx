@@ -46,7 +46,11 @@ const Input = (props: InputProps) => {
 	if (props.as === "input" && props.typed === "checkbox") {
 		return (
 			<>
-				<label htmlFor={props.id} className="mt-3 flex items-center gap-1 text-sm">
+				<label
+					htmlFor={props.id}
+					className={`mt-3 flex items-center gap-1 text-xs lg:text-sm ${
+						props.width ? props.width : "w-full"
+					}`}>
 					<input
 						type="checkbox"
 						className="peer sr-only rounded accent-accent"
