@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation"
 import { useFormik } from "formik"
 import Link from "next/link"
 
-import { Button, Input } from "../../_components"
-import { SignupSchema } from "../../_lib/schema"
+import { Button, Input } from "@/app/_components"
+import { SignupSchema } from "@/app/_lib/schema"
 
 const initialValues = {
 	email: "",

@@ -27,8 +27,8 @@ const Carousel = (props: Props) => {
 			{props.data.map((item, index) => (
 				<motion.div
 					key={item.id}
-					initial={{ opacity: 0, scale: 1 }}
-					whileInView={{ opacity: 1, scale: 1.05 }}
+					initial={{ scale: 1 }}
+					whileInView={{ scale: 1.05 }}
 					transition={{
 						type: "tween",
 						delay: 0.1,

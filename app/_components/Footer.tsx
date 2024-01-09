@@ -6,7 +6,7 @@ import { FooterData } from "../_assets/footer-data"
 
 const Footer = () => {
 	return (
-		<footer className="flex w-full flex-col items-center bg-dark px-5 py-10 text-light lg:px-20 lg:py-20">
+		<footer className="flex w-full flex-col items-center bg-dark px-5 py-10 text-light lg:px-20 lg:pt-20">
 			<div className="flex w-full flex-wrap items-start justify-between gap-10 py-10 lg:gap-32">
 				<div className="flex w-full min-w-[300px] flex-col items-center lg:w-max">
 					<Link href="/" prefetch className="text-3xl font-semibold lg:text-5xl">
@@ -38,7 +38,7 @@ const Footer = () => {
 									<Link
 										href={link.href}
 										key={idx}
-										className="w-fit text-xs text-gray-300 transition-colors duration-300 hover:text-gray-400 lg:text-sm">
+										className="link light w-fit text-xs text-gray-300 lg:text-sm">
 										{link.label}
 									</Link>
 								))}

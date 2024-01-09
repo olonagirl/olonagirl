@@ -5,6 +5,7 @@ import { PaystackButton } from "react-paystack"
 import { useEffect, useState } from "react"
 import { useFormik } from "formik"
 
+import { CheckoutSchema } from "../_lib/schema"
 import { Button, Input } from "../_components"
 import { commerce } from "../_lib/commerce"
 import { ShippingProps } from "../_types"
@@ -34,6 +35,7 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 
 	const { handleChange, handleSubmit, values } = useFormik({
 		initialValues,
+		validationSchema: CheckoutSchema,
 		onSubmit: (data) => console.log(data),
 	})
 

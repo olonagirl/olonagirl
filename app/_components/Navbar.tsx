@@ -153,7 +153,7 @@ const Navbar = () => {
 									href={item.href}
 									prefetch
 									onClick={() => setMenuOpen(false)}
-									className="link text-xs font-semibold capitalize lg:text-sm">
+									className="link text-sm font-semibold capitalize">
 									{item.label}
 								</Link>
 							))}
