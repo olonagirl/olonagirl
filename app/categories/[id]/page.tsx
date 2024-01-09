@@ -2,9 +2,9 @@
 import { ProductCollection } from "@chec/commerce.js/features/products"
 import { useEffect, useState } from "react"
 
-import { Loader, Pagination, ProductCard } from "../../_components"
-import { commerce } from "../../_lib/commerce"
-import { normalizeString } from "../../_lib"
+import { Loader, Pagination, ProductCard } from "@/app/_components"
+import { commerce } from "@/app/_lib/commerce"
+import { normalizeString } from "@/app/_lib"
 
 interface Props {
 	params: {

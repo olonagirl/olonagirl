@@ -6,10 +6,10 @@ import { Info } from "@phosphor-icons/react"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 
-import { Button, Input, Loader, Spinner } from "../../_components"
-import { commerce } from "../../_lib/commerce"
+import { Button, Input, Loader, Spinner } from "@/app/_components"
+import { commerce } from "@/app/_lib/commerce"
 import ImageSlider from "../ImageSlider"
-import { capitalize } from "../../_lib"
+import { capitalize } from "@/app/_lib"
 
 interface Props {
 	params: {

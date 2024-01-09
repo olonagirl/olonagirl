@@ -1,5 +1,5 @@
-import { LineItemCard, Loader } from "../../_components"
-import { commerce } from "../../_lib/commerce"
+import { LineItemCard, Loader } from "@/app/_components"
+import { commerce } from "@/app/_lib/commerce"
 import Shipping from "../Shipping"
 
 interface Props {

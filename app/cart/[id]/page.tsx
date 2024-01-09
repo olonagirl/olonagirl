@@ -5,9 +5,9 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-import { Button, Loader, Spinner } from "../../_components"
-import { commerce } from "../../_lib/commerce"
-import { LoadingProps } from "../../_types"
+import { Button, Loader, Spinner } from "@/app/_components"
+import { commerce } from "@/app/_lib/commerce"
+import { LoadingProps } from "@/app/_types"
 
 interface Props {
 	params: {

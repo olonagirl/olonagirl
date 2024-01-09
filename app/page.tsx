@@ -5,6 +5,7 @@ import { CarouselData } from "./_assets/carousel-data"
 import { MiscData } from "./_assets/misc-data"
 import { commerce } from "./_lib/commerce"
 import {
+	Card,
 	Carousel,
 	LogoSlide,
 	ProductCard,
@@ -24,17 +25,11 @@ const Home = async () => {
 				<Carousel data={CarouselData} />
 			</section>
 			<LogoSlide />
-			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
+			<section className="flex w-full flex-col items-center py-20">
 				<p className="mb-5 text-2xl lg:text-4xl">Explore the store</p>
 				<div className="flex w-full flex-wrap items-center justify-center gap-4">
 					{categories.data.map((category) => (
-						<Link
-							href={`/categories/${category.slug}`}
-							key={category.slug}
-							prefetch
-							className="rounded bg-gray-300 p-2 text-lg capitalize hover:bg-gray-400 lg:text-xl">
-							{category.name}
-						</Link>
+						<Card key={category.slug} {...category} />
 					))}
 				</div>
 			</section>
@@ -51,7 +46,8 @@ const Home = async () => {
 				<p className="mb-5 text-2xl lg:text-4xl">Shop with confidence</p>
 				<div className="my-4 grid w-full grid-cols-2 gap-x-4 gap-y-8 lg:w-2/3 lg:self-end">
 					{MiscData.map((item, index) => (
-						<div key={index} className="flex w-full flex-col">
+						<div key={index} className="relative flex w-full flex-col">
+							<span className="absolute -left-4 -top-4 text-dark/20">{item.icon}</span>
 							<p className="text-sm font-semibold lg:text-base">{item.heading}</p>
 							<p className="w-full text-xs lg:w-2/3 lg:text-sm">{item.content}</p>
 						</div>
@@ -69,7 +65,20 @@ const Home = async () => {
 					))}
 				</div>
 			</section>
-			<section className="h-[75vh] w-full bg-dark/75 bg-fixed-1 bg-cover bg-fixed bg-center bg-blend-multiply"></section>
+			<section className="h-[50vh] w-full bg-dark/75 bg-fixed-1 bg-cover bg-fixed bg-center bg-blend-multiply"></section>
+			<section className="h-[50vh] w-full bg-dark/75 bg-fixed-2 bg-cover bg-fixed bg-center bg-blend-multiply"></section>
+			<section className="grid w-full place-items-center bg-dark px-5 py-20 lg:px-20">
+				<div className="flex w-full flex-col items-center justify-center">
+					<p className="my-5 text-center text-3xl text-light lg:text-5xl">
+						Want to experience the best of Afro-fashion? Start shoppng now!
+					</p>
+					<Link
+						href="/products"
+						className="flex h-[40px] w-[200px] items-center justify-center gap-1 bg-light text-sm text-dark transition-all duration-300 hover:opacity-95 lg:w-[300px]">
+						Shop Now
+					</Link>
+				</div>
+			</section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="w-full text-center text-base lg:w-1/2 lg:text-xl">
 					Subscribe to our newsletter and never miss a thing. We will bring you the

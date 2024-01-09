@@ -1,7 +1,7 @@
 "use client"
 import { useFormik } from "formik"
+import * as Yup from "yup"
 
-import { EmailSubscriptionSchema } from "../_lib/schema"
 import Button from "./Button"
 import Input from "./Input"
 
@@ -9,9 +9,10 @@ const Subscription = () => {
 	const { errors, handleChange, handleSubmit } = useFormik({
 		initialValues: {
 			email: "",
-			agree: false,
 		},
-		validationSchema: EmailSubscriptionSchema,
+		validationSchema: Yup.object({
+			email: Yup.string().email("Invalid email!").required("Email is required!"),
+		}),
 		onSubmit: (data) => console.log(data),
 	})
 
@@ -26,15 +27,6 @@ const Subscription = () => {
 					onChange={handleChange}
 					placeholder="Email"
 					error={errors.email}
-				/>
-				<Input
-					as="input"
-					typed="checkbox"
-					id="agree"
-					onChange={handleChange}
-					label="I agree to receive promotions from Olonagirl."
-					error={errors.agree}
-					width="w-fit"
 				/>
 				<Button type="submit" width="w-[200px]">
 					Subscribe

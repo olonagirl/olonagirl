@@ -5,9 +5,9 @@ import { useFormik } from "formik"
 import { useState } from "react"
 import Link from "next/link"
 
-import { Button, Input, Spinner } from "../../_components"
-import { SigninSchema } from "../../_lib/schema"
-import { store } from "../../_store"
+import { Button, Input, Spinner } from "@/app/_components"
+import { SigninSchema } from "@/app/_lib/schema"
+import { store } from "@/app/_store"
 
 const initialValues = { email: "", password: "" }
 
@@ -17,22 +17,23 @@ const Signin = () => {
 	const { login, user } = store()
 	const { push } = useRouter()
 
+	const loginUser = async (email: string, password: string) => {
+		const { data, error } = await supabase.auth.signInWithPassword({
+			email,
+			password,
+		})
+		if (error) return console.log(error.message)
+		const { session, user } = data
+		login(user, session)
+		push("/")
+	}
+
 	const { errors, handleChange, handleSubmit } = useFormik({
 		initialValues,
 		validationSchema: SigninSchema,
 		onSubmit: async ({ email, password }) => {
 			setLoading(true)
-			const { data, error } = await supabase.auth.signInWithPassword({
-				email,
-				password,
-			})
-			if (!error) {
-				const { session, user } = data
-				login(user, session)
-				push("/")
-			} else {
-				console.log(error.message)
-			}
+			await loginUser(email, password)
 			setLoading(false)
 		},
 	})

@@ -76,6 +76,10 @@ button:active {
 	transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+.link.light::before {
+	background: var(--light);
+}
+
 @media (hover: hover) and (pointer: fine) {
 	.link:hover::before {
 		left: 0;

@@ -50,12 +50,3 @@ export const CheckoutSchema = Yup.object({
 	shippingSubdivision: Yup.string().required("State is required!"),
 	shippingOption: Yup.string().required("Shipping option is required!"),
 })
-
-export const EmailSubscriptionSchema = Yup.object({
-	email: Yup.string()
-		.email("Please enter a valid email!")
-		.required("Email is required!"),
-	agree: Yup.boolean()
-		.oneOf([true], "You must agree to the terms and conditions")
-		.required("You must agree to the terms and conditions"),
-})
