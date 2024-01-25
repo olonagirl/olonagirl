@@ -9,6 +9,7 @@ import { CheckoutSchema } from "../_lib/schema"
 import { Button, Input } from "../_components"
 import { commerce } from "../_lib/commerce"
 import { ShippingProps } from "../_types"
+import PayPal from "./PayPal"
 
 interface Props {
 	checkoutToken: CheckoutToken
@@ -183,6 +184,7 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Payment method</p>
 				<PaystackButton {...componentProps} />
+				<PayPal amount={cart.subtotal.raw} currency={cart.currency.code} />
 				<Button type="submit">Proceed</Button>
 			</form>
 		</div>
