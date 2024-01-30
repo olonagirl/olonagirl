@@ -1,5 +1,6 @@
 "use client"
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token"
+import { PayPalButtons } from "@paypal/react-paypal-js"
 import { Cart } from "@chec/commerce.js/types/cart"
 import { PaystackButton } from "react-paystack"
 import { useEffect, useState } from "react"
@@ -9,7 +10,6 @@ import { CheckoutSchema } from "../_lib/schema"
 import { Button, Input } from "../_components"
 import { commerce } from "../_lib/commerce"
 import { ShippingProps } from "../_types"
-import PayPal from "./PayPal"
 
 interface Props {
 	checkoutToken: CheckoutToken
@@ -184,7 +184,25 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Payment method</p>
 				<PaystackButton {...componentProps} />
-				<PayPal amount={cart.subtotal.raw} currency={cart.currency.code} />
+				<PayPalButtons
+					style={{ layout: "vertical", shape: "pill", color: "gold" }}
+					createOrder={(_, actions) =>
+						actions.order.create({
+							purchase_units: [{ amount: { value: cart.subtotal.raw.toString() } }],
+						})
+					}
+					onApprove={async (_, actions) => {
+						try {
+							actions.order?.capture().then((details) => {
+								const name = details?.payer?.name?.given_name
+								alert(`Transaction completed by ${name}`)
+							})
+						} catch (error) {
+							console.error(error)
+							alert("Transaction failed")
+						}
+					}}
+				/>
 				<Button type="submit">Proceed</Button>
 			</form>
 		</div>
