@@ -7,14 +7,13 @@ import Link from "next/link"
 
 import { Button, Input, Spinner } from "@/app/_components"
 import { SigninSchema } from "@/app/_lib/schema"
-import constants from "../../_config/constants"
 
 const initialValues = { email: "", name: "", password: "" }
 
 const Signup = () => {
 	const supabase = createClientComponentClient({
-		supabaseKey: constants.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-		supabaseUrl: constants.NEXT_PUBLIC_SUPABASE_URL,
+		supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
 	})
 	const [loading, setLoading] = useState(false)
 	const { push } = useRouter()
