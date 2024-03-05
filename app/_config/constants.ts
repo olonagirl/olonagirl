@@ -1,0 +1,13 @@
+const NEXT_PUBLIC_SUPABASE_URL = "https://idywbbvjwqjtgnpegfyt.supabase.co"
+const NEXT_PUBLIC_SUPABASE_ANON_KEY =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkeXdiYnZqd3FqdGducGVnZnl0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM1OTEzODAsImV4cCI6MjAxOTE2NzM4MH0.QkG_WxGG6x7ZnDyda2legzX_KdeqnEhOZbor7I31ePM"
+const NEXT_PUBLIC_CHEC_PUBLIC_KEY =
+	"pk_55251340e2e1c2d6b6c6b4c9a716aaaa7327c64feba2c"
+
+const constants = {
+	NEXT_PUBLIC_CHEC_PUBLIC_KEY,
+	NEXT_PUBLIC_SUPABASE_ANON_KEY,
+	NEXT_PUBLIC_SUPABASE_URL,
+}
+
+export default constants
