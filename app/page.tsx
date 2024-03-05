@@ -38,7 +38,7 @@ const Home = async () => {
 				<div className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
 					{collection.data
 						.sort((a, b) => b.created - a.created)
-						.map((product) => <ProductCard key={product.id} {...product} />)
+						.map((product) => <ProductCard key={product.id} product={product} />)
 						.slice(0, 8)}
 				</div>
 			</section>
