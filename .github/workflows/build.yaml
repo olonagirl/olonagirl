@@ -8,9 +8,6 @@ on:
 jobs:
  build:
   runs-on: ubuntu-latest
-  env:
-   CHEC_PUBLIC_KEY: ${{ vars.CHEC_PUBLIC_KEY}}
-   NEXT_PUBLIC_CHEC_PUBLIC_KEY: ${{ vars.NEXT_PUBLIC_CHEC_PUBLIC_KEY}}
 
   steps:
    - name: check-out
