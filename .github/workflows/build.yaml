@@ -8,13 +8,16 @@ on:
 jobs:
  build:
   runs-on: ubuntu-latest
+  env:
+   CHEC_PUBLIC_KEY: ${{ vars.CHEC_PUBLIC_KEY}}
+   NEXT_PUBLIC_CHEC_PUBLIC_KEY: ${{ vars.NEXT_PUBLIC_CHEC_PUBLIC_KEY}}
 
   steps:
    - name: check-out
-     uses: actions/checkout@v3
+     uses: actions/checkout@v4
 
    - name: set-up-node
-     uses: actions/setup-node@v2
+     uses: actions/setup-node@v4
      with:
       node-version: 20
 
