@@ -40,7 +40,7 @@ const Products = () => {
 			<hr className="my-4 w-full bg-dark" />
 			<section className="my-5 grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
 				{collection.data.map((product) => (
-					<ProductCard key={product.id} {...product} />
+					<ProductCard key={product.id} product={product} />
 				))}
 			</section>
 			{handlePagination()}
