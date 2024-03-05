@@ -7,7 +7,8 @@ import "./globals.css"
 
 export const metadata: Metadata = {
 	title: "OlonaGirl",
-	description: "",
+	description: "A black-owned ready-to-wear clothing outfit based in Lagos",
+	keywords: ["clothes", "ready to wear", "african", ""],
 }
 
 const font = Space_Grotesk({

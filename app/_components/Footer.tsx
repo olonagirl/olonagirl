@@ -1,8 +1,10 @@
 "use client"
 import { RiInstagramLine } from "@remixicon/react"
+import Image from "next/image"
 import Link from "next/link"
 
 import { FooterData } from "../_assets/footer-data"
+import { olonagirl_dark } from "../_assets/images"
 
 const Footer = () => {
 	return (
@@ -10,7 +12,7 @@ const Footer = () => {
 			<div className="flex w-full flex-wrap items-start justify-between gap-10 py-10 lg:gap-32">
 				<div className="flex w-full min-w-[300px] flex-col items-center lg:w-max">
 					<Link href="/" prefetch className="text-3xl font-semibold lg:text-5xl">
-						Olonagirl
+						<Image src={olonagirl_dark} alt="olonagirl logo" width={250} />
 					</Link>
 					<div className="mt-7 flex items-center justify-center gap-4 text-xs lg:text-sm">
 						<a

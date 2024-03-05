@@ -78,7 +78,7 @@ const Home = async () => {
 			<section className="grid w-full place-items-center bg-dark px-5 py-20 lg:px-20">
 				<div className="flex w-full flex-col items-center justify-center">
 					<p className="my-5 text-center text-3xl text-light lg:text-5xl">
-						Want to experience the best of Afro-fashion? Start shoppng now!
+						Want to experience the best of Afro-fashion? Start shopping now!
 					</p>
 					<Link
 						href="/products"
