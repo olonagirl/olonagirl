@@ -5,7 +5,6 @@ import { CarouselData } from "./_assets/carousel-data"
 import { MiscData } from "./_assets/misc-data"
 import { commerce } from "./_lib/commerce"
 import {
-	// Card,
 	Carousel,
 	LogoSlide,
 	ProductCard,
@@ -15,9 +14,8 @@ import {
 
 const Home = async () => {
 	const collection = await commerce.products.list().then((data) => data)
-	const categories = await commerce.categories.list().then((data) => data)
 
-	if (!collection || !categories) return null
+	if (!collection) return null
 
 	return (
 		<main className="w-full bg-light">
@@ -27,11 +25,6 @@ const Home = async () => {
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center py-20">
 				<p className="mb-5 text-2xl lg:text-4xl">Explore the store</p>
-				{/* <div className="flex w-full flex-wrap items-center justify-center gap-4">
-					{categories.data.map((category) => (
-						<Card key={category.slug} {...category} />
-					))}
-				</div> */}
 			</section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="mb-5 text-2xl lg:text-4xl">New Arrivals</p>
@@ -61,7 +54,7 @@ const Home = async () => {
 				</p>
 				<div className="my-4 grid w-full grid-cols-1 gap-4 lg:grid-cols-4">
 					{TestimonialData.map((item) => (
-						<TestimonialCard key={item.id} {...item} />
+						<TestimonialCard key={item.id} item={item} />
 					))}
 				</div>
 			</section>
