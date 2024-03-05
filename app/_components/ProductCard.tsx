@@ -4,16 +4,19 @@ import Image from "next/image"
 import Link from "next/link"
 
 interface Props {
-	product: Product
+	id: Product["id"]
+	image: Product["image"]
+	name: Product["name"]
+	price: Product["price"]
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ id, image, name, price }: Props) => {
 	return (
-		<Link href={`/products/${product.id}`} prefetch className="w-full">
+		<Link href={`/products/${id}`} prefetch className="w-full">
 			<div className="group relative aspect-[2/3] w-full overflow-hidden">
 				<Image
-					src={String(product.image?.url)}
-					alt={String(product.image?.filename)}
+					src={String(image?.url)}
+					alt={String(image?.filename)}
 					className="object-cover transition-all duration-300 hover:scale-105"
 					fill
 					sizes="(max-width: 1024px) 100%,"
@@ -22,9 +25,9 @@ const ProductCard = ({ product }: Props) => {
 			</div>
 			<div className="w-full py-2">
 				<div className="flex w-full items-center justify-between">
-					<p className="text-xs font-light capitalize lg:text-sm">{product.name}</p>
+					<p className="text-xs font-light capitalize lg:text-sm">{name}</p>
 					<p className="text-xs font-medium lg:text-sm">
-						{product.price.formatted_with_symbol}
+						{price.formatted_with_symbol}
 					</p>
 				</div>
 			</div>
