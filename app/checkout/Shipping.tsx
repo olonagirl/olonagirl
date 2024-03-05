@@ -188,7 +188,14 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 					style={{ layout: "vertical", shape: "pill", color: "gold" }}
 					createOrder={(_, actions) =>
 						actions.order.create({
-							purchase_units: [{ amount: { value: cart.subtotal.raw.toString() } }],
+							purchase_units: [
+								{
+									amount: {
+										currency_code: cart.currency.code,
+										value: cart.subtotal.raw.toString(),
+									},
+								},
+							],
 						})
 					}
 					onApprove={async (_, actions) => {
