@@ -62,7 +62,14 @@ const Home = async () => {
 				</p>
 				<div className="my-4 grid w-full grid-cols-1 gap-4 lg:grid-cols-4">
 					{TestimonialData.map((item) => (
-						<TestimonialCard key={item.id} item={item} />
+						<TestimonialCard
+							key={item.id}
+							comment={item.comment}
+							id={item.id}
+							image={item.image}
+							name={item.name}
+							rating={item.rating}
+						/>
 					))}
 				</div>
 			</section>
