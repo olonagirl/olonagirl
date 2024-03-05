@@ -9,10 +9,12 @@ import { Button, Input, Spinner } from "@/app/_components"
 import { SigninSchema } from "@/app/_lib/schema"
 import { store } from "@/app/_store"
 
+const supabaseUrl = String(process.env.NEXT_PUBLIC_SUPABASE_URL)
+const supabaseKey = String(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 const initialValues = { email: "", password: "" }
 
 const Signin = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({ supabaseKey, supabaseUrl })
 	const [loading, setLoading] = useState(false)
 	const { login, user } = store()
 	const { push } = useRouter()

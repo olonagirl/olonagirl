@@ -7,6 +7,8 @@ import Link from "next/link"
 import { Button, Input } from "@/app/_components"
 import { SignupSchema } from "@/app/_lib/schema"
 
+const supabaseUrl = String(process.env.NEXT_PUBLIC_SUPABASE_URL)
+const supabaseKey = String(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 const initialValues = {
 	email: "",
 	name: "",
@@ -15,7 +17,7 @@ const initialValues = {
 }
 
 const Signup = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({supabaseKey, supabaseUrl})
 	const { push } = useRouter()
 
 	const { errors, handleChange, handleSubmit } = useFormik({

@@ -8,10 +8,12 @@ import Link from "next/link"
 import { Button, Input, Spinner } from "@/app/_components"
 import { SigninSchema } from "@/app/_lib/schema"
 
+const supabaseUrl = String(process.env.NEXT_PUBLIC_SUPABASE_URL)
+const supabaseKey = String(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 const initialValues = { email: "", name: "", password: "" }
 
 const Signup = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({ supabaseKey, supabaseUrl })
 	const [loading, setLoading] = useState(false)
 	const { push } = useRouter()
 
