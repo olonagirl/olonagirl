@@ -5,7 +5,7 @@ import { CarouselData } from "./_assets/carousel-data"
 import { MiscData } from "./_assets/misc-data"
 import { commerce } from "./_lib/commerce"
 import {
-	Card,
+	// Card,
 	Carousel,
 	LogoSlide,
 	ProductCard,
@@ -27,11 +27,11 @@ const Home = async () => {
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center py-20">
 				<p className="mb-5 text-2xl lg:text-4xl">Explore the store</p>
-				<div className="flex w-full flex-wrap items-center justify-center gap-4">
+				{/* <div className="flex w-full flex-wrap items-center justify-center gap-4">
 					{categories.data.map((category) => (
 						<Card key={category.slug} {...category} />
 					))}
-				</div>
+				</div> */}
 			</section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="mb-5 text-2xl lg:text-4xl">New Arrivals</p>

@@ -63,7 +63,10 @@ const Product = ({ params: { id } }: Props) => {
 					</div>
 					<div className="flex w-full flex-col">
 						<p className="text-xs capitalize text-gray-400 lg:text-sm">
-							{product.categories[0].name} /
+							{product.categories
+								? product.categories[0]?.name
+								: "Category not defined"}{" "}
+							/
 						</p>
 						<div className="flex w-full items-center justify-between">
 							<p className="my-3 text-base capitalize lg:text-2xl">{product.name}</p>

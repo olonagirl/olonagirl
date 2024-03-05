@@ -11,7 +11,7 @@ export const CarouselData = [
 		id: "c1248760-3441-492f-b52f-a25232ab8b68",
 		name: "item_2",
 		image: carousel_2,
-		text: "Our dresses are made with 100% cotton_",
+		text: "Our dresses are made with 100% natural materials_",
 	},
 	{
 		id: "9a71b2a4-0015-43a4-9c34-729f075a3e5f",

@@ -8,8 +8,8 @@ const ProductCard = (props: Product) => {
 		<Link href={`/products/${props.id}`} prefetch className="w-full">
 			<div className="group relative aspect-[2/3] w-full overflow-hidden">
 				<Image
-					src={props.assets[0].url}
-					alt={props.assets[0].filename}
+					src={String(props.image?.url)}
+					alt={String(props.image?.filename)}
 					className="object-cover transition-all duration-300 hover:scale-105"
 					fill
 					sizes="(max-width: 1024px) 100%,"
