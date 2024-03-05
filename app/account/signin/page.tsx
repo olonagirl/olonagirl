@@ -12,7 +12,10 @@ import { store } from "@/app/_store"
 const initialValues = { email: "", password: "" }
 
 const Signin = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({
+		supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+	})
 	const [loading, setLoading] = useState(false)
 	const { login, user } = store()
 	const { push } = useRouter()

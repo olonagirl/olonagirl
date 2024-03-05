@@ -11,7 +11,10 @@ import { SigninSchema } from "@/app/_lib/schema"
 const initialValues = { email: "", name: "", password: "" }
 
 const Signup = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({
+		supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+	})
 	const [loading, setLoading] = useState(false)
 	const { push } = useRouter()
 

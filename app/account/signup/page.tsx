@@ -15,7 +15,10 @@ const initialValues = {
 }
 
 const Signup = () => {
-	const supabase = createClientComponentClient()
+	const supabase = createClientComponentClient({
+		supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+		supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+	})
 	const { push } = useRouter()
 
 	const { errors, handleChange, handleSubmit } = useFormik({

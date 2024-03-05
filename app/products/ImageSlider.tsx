@@ -1,5 +1,6 @@
 "use client"
 import { Asset } from "@chec/commerce.js/types/asset"
+import { motion } from "framer-motion"
 import { useState } from "react"
 import Image from "next/image"
 
@@ -32,19 +33,25 @@ const ImageSlider = (props: Props) => {
 				))}
 			</div>
 			<div className="flex flex-1 flex-col items-center gap-4">
-				<div className="relative aspect-[5/6] w-full overflow-hidden">
-					{props.assets.map((asset, index) => (
-						<Image
-							src={asset.url}
-							alt={asset.filename}
-							key={asset.id}
-							fill
-							sizes="(max-width: 1024px) 100%,"
-							priority
-							className={`object-cover ${index === current ? "block" : "hidden"}`}
-						/>
-					))}
-				</div>
+				<motion.div
+					initial={{ scale: 1 }}
+					animate={{ scale: 1.02 }}
+					transition={{
+						type: "tween",
+						delay: 0.1,
+						duration: 1,
+						easings: ["easeIn", "easeOut"],
+					}}
+					className="relative aspect-[5/6] w-full overflow-hidden">
+					<Image
+						src={props.assets[current].url}
+						alt={props.assets[current].filename}
+						fill
+						sizes="(max-width: 1024px) 100%,"
+						priority
+						className="object-cover"
+					/>
+				</motion.div>
 			</div>
 		</div>
 	)

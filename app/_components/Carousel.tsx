@@ -12,19 +12,19 @@ interface Props {
 	}[]
 }
 
-const Carousel = (props: Props) => {
+const Carousel = ({ data }: Props) => {
 	const [current, setCurrent] = useState(0)
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setCurrent((current + 1) % props.data.length)
+			setCurrent((current + 1) % data.length)
 		}, 5000)
 		return () => clearInterval(interval)
 	})
 
 	return (
 		<div className="relative flex h-full w-full items-center justify-center overflow-hidden">
-			{props.data.map((item, index) => (
+			{data.map((item, index) => (
 				<motion.div
 					key={item.id}
 					initial={{ scale: 1 }}
@@ -50,7 +50,7 @@ const Carousel = (props: Props) => {
 			))}
 			<div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-dark/40">
 				<div className="flex w-[90%] items-center justify-center overflow-hidden lg:w-fit">
-					{props.data.map((item, index) => (
+					{data.map((item, index) => (
 						<motion.p
 							key={index}
 							initial={{ y: "-100%" }}
