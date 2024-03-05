@@ -4,6 +4,7 @@ import { Cart } from "@chec/commerce.js/types/cart"
 import { Dialog, Menu } from "@headlessui/react"
 import { RiCloseLine } from "@remixicon/react"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import Link from "next/link"
 import {
 	RiSearch2Line,
@@ -14,6 +15,7 @@ import {
 import { NavLinkData } from "../_assets/navlink-data"
 import HamburgerButton from "./HamburgerButton"
 import { commerce } from "../_lib/commerce"
+import { olonagirl_light } from "../_assets/images"
 import { store } from "../_store"
 import Input from "./Input"
 import MyCart from "./Cart"
@@ -69,10 +71,17 @@ const Navbar = () => {
 				className={`left-0 top-0 !z-[5] flex w-screen items-center justify-between border-b border-dark bg-transparent bg-white px-5 py-4 lg:px-20 ${
 					scrolled ? "fixed" : "relative"
 				}`}>
-				<div className="flex items-center gap-4">
+				<div className="flex h-[30px] items-center gap-4">
 					<HamburgerButton open={menuOpen} setOpen={setMenuOpen} />
-					<Link href="/" className="text-xl font-semibold lg:text-2xl">
-						Olonagirl
+					<Link href="/" className="relative h-full w-[100px] lg:w-[200px]">
+						<Image
+							src={olonagirl_light}
+							alt="olonagirl logo"
+							fill
+							priority
+							sizes="(max-width: 1024px) 100%,"
+							className="w-full"
+						/>
 					</Link>
 				</div>
 				<div className="hidden items-center gap-4 lg:flex">
