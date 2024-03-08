@@ -10,6 +10,7 @@ import { Button, Input, Loader, Spinner } from "@/app/_components"
 import { commerce } from "@/app/_lib/commerce"
 import ImageSlider from "../ImageSlider"
 import { capitalize } from "@/app/_lib"
+import { FabricCare } from "./options"
 
 interface Props {
 	params: {
@@ -125,6 +126,18 @@ const Product = ({ params: { id } }: Props) => {
 						<p className="text-xs lg:text-sm">
 							{stripHtml(product.description).result}
 						</p>
+						<hr className="my-3 w-full bg-dark" />
+						<p className="text-sm font-semibold lg:text-base">Fabric Care</p>
+						{FabricCare.map((opt) => (
+							<div key={opt.fabric} className="my-2">
+								<p className="text-xs font-medium lg:text-sm">{opt.fabric}:</p>
+								{opt.care.map((text) => (
+									<p key={text} className="text-xs lg:text-sm">
+										{text}
+									</p>
+								))}
+							</div>
+						))}
 						<hr className="my-3 w-full bg-dark" />
 						<div className="flex w-full items-center justify-between">
 							<p className="text-xs lg:text-sm">Share</p>
