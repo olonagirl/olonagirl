@@ -14,8 +14,9 @@ import {
 
 const Home = async () => {
 	const collection = await commerce.products.list().then((data) => data)
+	const categories = await commerce.categories.list().then((data) => data)
 
-	if (!collection) return null
+	if (!collection || !categories) return null
 
 	return (
 		<main className="w-full bg-light">
@@ -25,6 +26,16 @@ const Home = async () => {
 			<LogoSlide />
 			<section className="flex w-full flex-col items-center py-20">
 				<p className="mb-5 text-2xl lg:text-4xl">Explore the store</p>
+				<div className="flex w-full flex-wrap items-center justify-center gap-5">
+					{categories.data.map((category) => (
+						<Link
+							key={category.id}
+							href={`/categories/${category.slug}`}
+							className="flex items-center justify-center rounded-md border-2 border-black bg-black px-5 py-2 font-medium text-white transition-all duration-300 hover:bg-transparent hover:text-black lg:text-2xl">
+							{category.name}
+						</Link>
+					))}
+				</div>
 			</section>
 			<section className="flex w-full flex-col items-center px-5 py-20 lg:px-20">
 				<p className="mb-5 text-2xl lg:text-4xl">New Arrivals</p>
