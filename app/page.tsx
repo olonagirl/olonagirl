@@ -1,3 +1,7 @@
+"use client"
+import { type CategoryCollection } from "@chec/commerce.js/features/categories"
+import { type ProductCollection } from "@chec/commerce.js/features/products"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 
 import { TestimonialData } from "./_assets/testimonial-data"
@@ -12,9 +16,19 @@ import {
 	TestimonialCard,
 } from "./_components"
 
-const Home = async () => {
-	const collection = await commerce.products.list().then((data) => data)
-	const categories = await commerce.categories.list().then((data) => data)
+const Home = () => {
+	const [categories, setCategories] = useState<CategoryCollection | null>(null)
+	const [collection, setCollection] = useState<ProductCollection | null>(null)
+
+	useEffect(() => {
+		const getData = async () => {
+			const collection = await commerce.products.list().then((data) => data)
+			const categories = await commerce.categories.list().then((data) => data)
+			setCollection(collection)
+			setCategories(categories)
+		}
+		getData()
+	}, [])
 
 	if (!collection || !categories) return null
 
