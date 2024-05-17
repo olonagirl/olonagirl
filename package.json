@@ -6,7 +6,8 @@
 		"node": ">=18"
 	},
 	"scripts": {
-		"format": "prettier --write \"app/**/*.ts\"",
+		"prettier:write": "prettier --write \"app/**/*.ts\"",
+		"prettier:check": "prettier --check \"app/**/*.ts\"",
 		"knip": "knip",
 		"dev": "next dev",
 		"build": "next build",

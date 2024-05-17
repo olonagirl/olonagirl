@@ -1,6 +1,5 @@
 "use client"
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token"
-// import { PayPalButtons } from "@paypal/react-paypal-js"
 import { Cart } from "@chec/commerce.js/types/cart"
 import { PaystackButton } from "react-paystack"
 import { useEffect, useState } from "react"
@@ -37,7 +36,9 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 	const { handleChange, handleSubmit, values } = useFormik({
 		initialValues,
 		validationSchema: CheckoutSchema,
-		onSubmit: (data) => console.log(data),
+		onSubmit: (values) => {
+			console.log(values)
+		},
 	})
 
 	const fetchShippingCountries = async () => {
@@ -79,9 +80,40 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 		lastname: values.lastname,
 		text: "Pay now",
 		className: "w-full bg-green-700 py-2 text-white",
-		onSuccess: () => console.log("success"),
-		onClose: () => console.log("error"),
+		onSuccess: (response: any) => console.log(response),
+		onClose: (error: any) => console.log(error),
 		phone: values.phone,
+	}
+
+	const captureOrder = async () => {
+		const res = await commerce.checkout.capture(id, {
+			line_items: cart.line_items,
+			customer: {
+				firstname: values.firstname,
+				lastname: values.lastname,
+				email: values.email,
+			},
+			shipping: {
+				name: `${values.firstname} ${values.lastname}`,
+				street: values.address1,
+				town_city: values.city,
+				county_state: values.shippingSubdivision,
+				postal_zip_code: values.zip,
+				country: values.shippingCountry,
+			},
+			billing: {
+				name: `${values.firstname} ${values.lastname}`,
+				street: values.address1,
+				town_city: values.city,
+				county_state: values.shippingSubdivision,
+				postal_zip_code: values.zip,
+				country: values.shippingCountry,
+			},
+			payment: {
+				gateway: "paystack",
+			},
+		})
+		return res
 	}
 
 	useEffect(() => {
@@ -160,13 +192,22 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 						width="w-full lg:w-1/3"
 					/>
 				</div>
-				<Input
-					typed="tel"
-					id="phone"
-					onChange={handleChange}
-					label="Phone"
-					width="w-full"
-				/>
+				<div className="flex flex-col items-center gap-4 lg:flex-row">
+					<Input
+						typed="email"
+						id="email"
+						onChange={handleChange}
+						label="Email"
+						width="w-full lg:w-1/2"
+					/>
+					<Input
+						typed="tel"
+						id="phone"
+						onChange={handleChange}
+						label="Phone"
+						width="w-full lg:w-1/2"
+					/>
+				</div>
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Shipping method</p>
 				<Input
@@ -183,8 +224,10 @@ const Shipping = ({ cart, checkoutToken: { id } }: Props) => {
 				</Input>
 				<hr className="my-4 w-full bg-dark" />
 				<p className="mb-5 text-sm font-semibold lg:text-base">Payment method</p>
-				<PaystackButton {...componentProps} />
-				<Button type="submit">Proceed</Button>
+				<PaystackButton {...componentProps} currency="USD" />
+				<Button type="submit" onClick={captureOrder}>
+					Proceed
+				</Button>
 			</form>
 		</div>
 	)
