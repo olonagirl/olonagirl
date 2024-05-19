@@ -1,7 +1,6 @@
 import { LineItemCard, Loader } from "@/app/_components"
 import { commerce } from "@/app/_lib/commerce"
 import Shipping from "../Shipping"
-import PaypalProvider from "../PaypalProvider"
 
 interface Props {
 	params: {
@@ -21,9 +20,7 @@ const Checkout = async ({ params: { id } }: Props) => {
 			<hr className="my-4 w-full bg-dark" />
 			<section className="flex w-full flex-col items-center gap-5 lg:flex-row lg:items-start lg:gap-10">
 				<div className="h-full w-full lg:w-1/2">
-					<PaypalProvider>
-						<Shipping cart={cart} checkoutToken={token} />
-					</PaypalProvider>
+					<Shipping cart={cart} checkoutToken={token} />
 				</div>
 				<div className="flex h-full w-full flex-col gap-3 lg:w-1/2">
 					{cart.line_items.map((item) => (
